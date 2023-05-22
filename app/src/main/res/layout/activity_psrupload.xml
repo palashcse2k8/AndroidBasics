@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    tools:context=".PSRUploadActivity">
+
+    <TextView
+        android:id="@+id/module_name"
+        android:layout_width="wrap_content"
+        android:layout_height="300px"
+        android:text="PSR (Proof of Submission of Return) Upload"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_corner_view"
+        android:clipToOutline="true"
+        android:padding="20sp"
+        android:elevation="5sp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/module_name" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="end"
+            android:background="@drawable/rounded_corner_view"
+            android:backgroundTint="#FF9800"
+            android:orientation="vertical" >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tax assessment Year :"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PSR Status :"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:padding="10dp"
+            android:layout_toRightOf="@+id/linearLayout1"
+            android:gravity="left"
+            android:background="@drawable/rounded_corner_view"
+            android:backgroundTint="#FF9800"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/label_tax_assessment_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/label_tax_assessment_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative1"
+        android:layout_marginTop="10sp"
+        android:padding="10sp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/white"
+        android:elevation="2sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:text=" Name : "
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/label_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_ac_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_name"
+        android:layout_marginTop="10sp"
+        android:padding="10sp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/white"
+        android:elevation="2sp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/label_ac_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:text=" Primary A/C Number : "
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/label_ac_number_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_tin_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_ac_number"
+        android:layout_marginTop="10sp"
+        android:padding="10sp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/white"
+        android:elevation="2sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_tin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" TIN : "
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/label_tin_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10sp"
+        android:padding="10sp"
+        android:text="UPLOAD"
+        android:background="@drawable/rounded_corner_view"
+        >
+    </Button>
+
+    </RelativeLayout>
