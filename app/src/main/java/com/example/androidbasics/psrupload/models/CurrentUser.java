@@ -1,4 +1,4 @@
-package com.example.androidbasics.models;
+package com.example.androidbasics.psrupload.models;
 
 enum PSRStatus {
     Submitted,
