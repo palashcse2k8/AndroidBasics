@@ -3,26 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ModuleSelectionFragment">
+
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/ModuleSelectionFragment"
+        android:name="com.example.androidbasics.ModuleSelectionFragment"
+        android:label="@string/module_selection_label"
+        tools:layout="@layout/fragment_module_selection">
+
+        <action
+            android:id="@+id/action_enter_psr_module"
+            app:destination="@id/PsrUploadFragment" />
+
+        <action
+            android:id="@+id/action_enter_from_c_module"
+            app:destination="@id/FormCFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PsrUploadFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrUploadFragment"
+        android:label="@string/psr_fragment_label"
+        tools:layout="@layout/fragment_psr_upload">
+
+        <action
+            android:id="@+id/action_psr_scanner"
+            app:destination="@id/PsrScannerFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PsrScannerFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrScannerFragment"
+        android:label="@string/psr_fragment_label"
+        tools:layout="@layout/fragment_psr_scanner">
+
+        <action
+            android:id="@+id/action_psr_submission"
+            app:destination="@id/PsrSubmissionFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_ThirdFragment"
+            app:destination="@id/ThirdFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PsrSubmissionFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrSubmissionFragment"
+        android:label="@string/psr_fragment_label"
+        tools:layout="@layout/fragment_psr_submission">
+
+        <action
+            android:id="@+id/action_home"
+            app:destination="@id/ModuleSelectionFragment"
+            app:popUpTo="@id/ModuleSelectionFragment"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/FormCFragment"
         android:name="com.example.androidbasics.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/module_selection_label"
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_enter_psr_module"
             app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.androidbasics.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_enter_from_c_module"
+            app:destination="@id/SecondFragment" />
     </fragment>
+
+
 </navigation>

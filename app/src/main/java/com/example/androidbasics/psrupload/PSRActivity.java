@@ -37,7 +37,7 @@ public class PSRActivity extends AppCompatActivity {
 
         acNumberText = findViewById(R.id.label_ac_number_text);
         String text = " " + currentUser.accountNumber;
-        acNumberText.setText("text");
+        acNumberText.setText(text);
 
         tinText = findViewById(R.id.label_tin_text);
         tinText.setText(currentUser.tinNumber);
@@ -48,7 +48,7 @@ public class PSRActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        if(currentUser.psrStatus.equalsIgnoreCase("UPDATED")) {
+        if (currentUser.psrStatus.equalsIgnoreCase("UPDATED")) {
             uploadButton.setVisibility(View.VISIBLE);
         } else {
             uploadButton.setVisibility(View.GONE);

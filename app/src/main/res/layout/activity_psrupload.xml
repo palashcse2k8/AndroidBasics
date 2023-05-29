@@ -80,5 +80,21 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50sp"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:paddingHorizontal="50sp"
+        android:paddingVertical="10sp"
+        android:text="SUBMIT"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

@@ -1,12 +1,16 @@
 package com.example.androidbasics;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding.fab.setOnClickListener(v -> {
             Log.d("myTag", "This is my message");
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.d("myTag", "Camera Permission is ok");
+            } else {
+                Log.d("myTag", "Permission Required");
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA},
+                        200);
+            }
             Intent intent = new Intent(MainActivity.this, PSRActivity.class);
             startActivity(intent);
         });
