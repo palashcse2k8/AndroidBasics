@@ -3,20 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".psrupload.models.PSRActivityTest">
+    tools:context=".psrupload.views.PsrMergeFragment">
 
-    <SurfaceView
-        android:id="@+id/surfaceView"
+    <ImageView
+        android:id="@+id/mergeImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"/>
 
     <Button
-        android:id="@+id/captureButton"
+        android:id="@+id/btn_submit_final"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capture"
+        android:paddingHorizontal="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="15sp"
+        android:text="SUBMIT" />
 
 </RelativeLayout>

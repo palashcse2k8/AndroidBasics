@@ -1,5 +1,6 @@
-package com.example.androidbasics;
+package com.example.androidbasics.psrupload.views;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,18 +8,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.lifecycle.ViewModelProviders;
 
-import com.example.androidbasics.databinding.FragmentModuleSelectionBinding;
+import com.example.androidbasics.databinding.FragmentPdfViewBinding;
+import com.example.androidbasics.psrupload.utils.PDFGenerator;
+import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ModuleSelectionFragment#newInstance} factory method to
+ * Use the {@link PdfViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ModuleSelectionFragment extends Fragment {
+public class PdfViewFragment extends Fragment {
+    FragmentPdfViewBinding binding;
 
-    FragmentModuleSelectionBinding binding;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,8 +30,11 @@ public class ModuleSelectionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    BitMapResource vm;
 
-    public ModuleSelectionFragment() {
+    Bitmap pdfBitmap;
+
+    public PdfViewFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +44,11 @@ public class ModuleSelectionFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ModuleSelectionFragment.
+     * @return A new instance of fragment PdfViewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ModuleSelectionFragment newInstance(String param1, String param2) {
-        ModuleSelectionFragment fragment = new ModuleSelectionFragment();
+    public static PdfViewFragment newInstance(String param1, String param2) {
+        PdfViewFragment fragment = new PdfViewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,20 +66,20 @@ public class ModuleSelectionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        binding = FragmentModuleSelectionBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        pdfBitmap = PDFGenerator.getPdfFileAsBitmap(vm.getUser().getValue().fileLocation);
+        binding = FragmentPdfViewBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnPsrUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(ModuleSelectionFragment.this)
-                .navigate(R.id.action_enter_psr_module));
+        binding.textViewLocation.setText("File Location : " + vm.getUser().getValue().fileLocation);
+
+        binding.imageViewPdf.setImageBitmap(pdfBitmap);
     }
 }

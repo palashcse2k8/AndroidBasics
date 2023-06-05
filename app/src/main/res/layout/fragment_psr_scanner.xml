@@ -28,7 +28,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Upload 1st part of your tax return"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <RelativeLayout
                     android:id="@+id/rel_layout_img1"
@@ -36,20 +38,37 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/img_part1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#CFC6C6"
                         android:layout_gravity="center"/>
 
-                    <Button
-                        android:id="@+id/btn_part1"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Upload"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
+                        android:layout_centerInParent="true">
+
+                        <Button
+                            android:id="@+id/btn_camera_part1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Camera"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+                        <Button
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/btn_media_part1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Media"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -69,7 +88,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Upload 2nd part of your tax return"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
                 <RelativeLayout
                     android:id="@+id/rel_layout_img2"
@@ -77,20 +98,40 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/img_part2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#CFC6C6"
                         android:layout_gravity="center"/>
 
-                    <Button
-                        android:id="@+id/btn_part2"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Upload"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
+                        >
+
+                        <Button
+                            android:id="@+id/btn_camera_part2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Camera"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+                        <Button
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/btn_media_part2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Media"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
 
                 </RelativeLayout>
 
@@ -106,9 +147,10 @@
             android:gravity="center">
             <Button
                 android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:paddingHorizontal="100dp"
                 android:text="Submit"
                 />
         </LinearLayout>

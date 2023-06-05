@@ -5,10 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/ModuleSelectionFragment">
 
-
     <fragment
         android:id="@+id/ModuleSelectionFragment"
-        android:name="com.example.androidbasics.ModuleSelectionFragment"
+        android:name="com.example.androidbasics.psrupload.views.ModuleSelectionFragment"
         android:label="@string/module_selection_label"
         tools:layout="@layout/fragment_module_selection">
 
@@ -24,7 +23,7 @@
     <fragment
         android:id="@+id/PsrUploadFragment"
         android:name="com.example.androidbasics.psrupload.views.PsrUploadFragment"
-        android:label="@string/psr_fragment_label"
+        android:label="@string/psr_fragment_status_label"
         tools:layout="@layout/fragment_psr_upload">
 
         <action
@@ -40,16 +39,40 @@
         tools:layout="@layout/fragment_psr_scanner">
 
         <action
-            android:id="@+id/action_psr_submission"
-            app:destination="@id/PsrSubmissionFragment" />
+            android:id="@+id/action_psr_merge"
+            app:destination="@id/PsrMergerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PsrMergerFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrMergeFragment"
+        android:label="@string/psr_fragment_merger_label"
+        tools:layout="@layout/fragment_psr_scanner">
+
         <action
-            android:id="@+id/action_SecondFragment_to_ThirdFragment"
-            app:destination="@id/ThirdFragment" />
+            android:id="@+id/action_psr_submission"
+            app:destination="@id/PsrSubmissionFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/PsrSubmissionFragment"
         android:name="com.example.androidbasics.psrupload.views.PsrSubmissionFragment"
+        android:label="@string/psr_fragment_submission_label"
+        tools:layout="@layout/fragment_psr_submission">
+
+        <action
+            android:id="@+id/action_home"
+            app:destination="@id/ModuleSelectionFragment"
+            app:popUpTo="@id/ModuleSelectionFragment"/>
+
+        <action
+            android:id="@+id/action_pdf_view"
+            app:destination="@id/PdfViewFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/PdfViewFragment"
+        android:name="com.example.androidbasics.psrupload.views.PdfViewFragment"
         android:label="@string/psr_fragment_label"
         tools:layout="@layout/fragment_psr_submission">
 
@@ -59,20 +82,19 @@
             app:popUpTo="@id/ModuleSelectionFragment"/>
     </fragment>
 
-
     <fragment
         android:id="@+id/FormCFragment"
-        android:name="com.example.androidbasics.FirstFragment"
+        android:name="com.example.androidbasics.psrupload.views.TestFragment"
         android:label="@string/module_selection_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_test">
 
         <action
             android:id="@+id/action_enter_psr_module"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/action_home" />
 
         <action
             android:id="@+id/action_enter_from_c_module"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/action_home" />
     </fragment>
 
 

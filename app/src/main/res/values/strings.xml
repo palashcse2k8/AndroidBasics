@@ -2,11 +2,11 @@
     <string name="app_name">AndroidBasics</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
     <string name="module_selection_label">Select Module</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="psr_fragment_label">PSR Upload</string>
-    <string name="third_fragment_label">Third Fragment</string>
+    <string name="psr_fragment_status_label">PSR Upload</string>
+    <string name="psr_fragment_submission_label">PSR Submitted</string>
+    <string name="psr_fragment_merger_label">PSR Merged</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
