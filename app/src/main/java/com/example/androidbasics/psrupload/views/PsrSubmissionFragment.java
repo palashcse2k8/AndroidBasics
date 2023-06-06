@@ -3,7 +3,9 @@ package com.example.androidbasics.psrupload.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +14,6 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -25,8 +26,9 @@ import com.example.androidbasics.psrupload.utils.PDFGenerator;
 import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -100,13 +102,30 @@ public class PsrSubmissionFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private Bitmap getBitmapFromAsset(String strName) throws IOException, IOException {
+        AssetManager assetManager = getActivity().getAssets();
+        Bitmap bitmap;
+        try (InputStream istr = assetManager.open(strName)) {
+            bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return bitmap;
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.labelTin.setText(vm.getUser().getValue().tinNumber);
         binding.labelTaxAssessmentYear.setText(vm.getUser().getValue().selectedAssessmentYear);
         binding.labelUploadDate.setText(date);
 
-        binding.btnDownload.setOnClickListener( v -> {
+        try {
+            binding.ivTick.setImageBitmap(getBitmapFromAsset("tik_mark.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        binding.btnDownload.setOnClickListener(v -> {
             NavHostFragment.findNavController(PsrSubmissionFragment.this)
                     .navigate(R.id.action_pdf_view);
         });
@@ -114,11 +133,10 @@ public class PsrSubmissionFragment extends Fragment {
         binding.btnDone.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrSubmissionFragment.this)
                 .navigate(R.id.action_home));
 
-        binding.btnShare.setOnClickListener(v-> shareFile());
-//        addListenerToToolBarBackButton();
+        binding.btnShare.setOnClickListener(v -> shareFile());
     }
 
-    public String getCurrentDate () {
+    public String getCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String currentDate = sdf.format(new Date());
         return currentDate;
@@ -138,6 +156,7 @@ public class PsrSubmissionFragment extends Fragment {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(Intent.createChooser(intent, "Share File"));
     }
+
     public boolean showExitConfirmationDialog(String str) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Exit by " + str);
@@ -157,17 +176,4 @@ public class PsrSubmissionFragment extends Fragment {
 
         return false;
     }
-
-//    void addListenerToToolBarBackButton() {
-//        final AppCompatActivity act = (AppCompatActivity) getActivity();
-//        if (act.getSupportActionBar() != null) {
-//            toolbar = (Toolbar) act.getSupportActionBar().getCustomView();
-//            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    showExitConfirmationDialog();
-//                }
-//            });
-//        }
-//    }
 }

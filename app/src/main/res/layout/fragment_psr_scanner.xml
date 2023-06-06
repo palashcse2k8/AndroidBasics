@@ -27,7 +27,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upload 1st part of your tax return"
+                    android:text="@string/upload_1st_part_of_your_tax_return"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
@@ -43,7 +43,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#CFC6C6"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/psr_first_part" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -55,16 +56,15 @@
                             android:id="@+id/btn_camera_part1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="Camera"
+                            android:text="@string/camera"
                             android:textColor="#FFFFFF"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                         <Button
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:id="@+id/btn_media_part1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Media"
+                            android:text="@string/media"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold" />
 
@@ -81,14 +81,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:padding="20dp"
-                android:layout_below="@+id/secondView"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upload 2nd part of your tax return"
-                    android:textSize="20sp"
+                    android:text="@string/upload_2nd_part_of_your_tax_return"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
@@ -103,35 +102,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#CFC6C6"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/psr_2nd_part" />
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        >
+                        android:layout_centerInParent="true">
 
                         <Button
                             android:id="@+id/btn_camera_part2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="Camera"
+                            android:text="@string/camera"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold" />
                         <Button
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:id="@+id/btn_media_part2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Media"
+                            android:text="@string/media"
                             android:textColor="#FFFFFF"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                     </LinearLayout>
-
-
 
                 </RelativeLayout>
 
@@ -151,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:paddingHorizontal="100dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 />
         </LinearLayout>
 

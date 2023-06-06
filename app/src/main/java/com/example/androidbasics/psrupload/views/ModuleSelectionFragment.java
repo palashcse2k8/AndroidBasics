@@ -22,10 +22,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.androidbasics.MainActivity;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentModuleSelectionBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,6 +71,7 @@ public class ModuleSelectionFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        checkPermissions(permissions);
     }
 
     @Override
@@ -80,10 +79,8 @@ public class ModuleSelectionFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentModuleSelectionBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -92,8 +89,7 @@ public class ModuleSelectionFragment extends Fragment {
         binding.btnPsrUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(ModuleSelectionFragment.this)
                 .navigate(R.id.action_enter_psr_module));
 
-        binding.btnFormC.setOnClickListener(view1 -> {;
-            checkPermissions(permissions);
+        binding.btnFormC.setOnClickListener(view1 -> {
             NavHostFragment.findNavController(ModuleSelectionFragment.this)
                     .navigate(R.id.action_enter_from_c_module);
         });
@@ -101,11 +97,11 @@ public class ModuleSelectionFragment extends Fragment {
 
     private static final int PERMISSION_REQUEST_CODE = 200;
 
-    String [] permissions = new String[]{CAMERA, MANAGE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
+    String[] permissions = new String[]{CAMERA, MANAGE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
 
-    private void checkPermissions(String [] permissions) {
+    private void checkPermissions(String[] permissions) {
 
-        Log.d("Palash","check permission called");
+        Log.d("Palash", "check permission called");
         for (int i = 0; i < permissions.length; i++) {
             int result = ContextCompat.checkSelfPermission(getContext(), permissions[i]);
             if (result != PackageManager.PERMISSION_GRANTED) {
@@ -115,10 +111,9 @@ public class ModuleSelectionFragment extends Fragment {
     }
 
     private void requestPermission() {
-        Log.d("Palash","requestPermission called");
+        Log.d("Palash", "requestPermission called");
         ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
     }
-
 
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
@@ -129,6 +124,7 @@ public class ModuleSelectionFragment extends Fragment {
                 .create()
                 .show();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

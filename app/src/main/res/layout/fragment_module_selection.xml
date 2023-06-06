@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="PSR Upload"></Button>
+        android:text="@string/psr_upload"/>
 
     <Button
         android:id="@+id/btn_form_c"
@@ -19,6 +19,6 @@
         android:layout_below="@+id/btn_psr_upload"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:text="Form C"></Button>
+        android:text="@string/form_c"/>
 
 </RelativeLayout>

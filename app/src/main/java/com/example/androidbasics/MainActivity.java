@@ -1,26 +1,13 @@
 package com.example.androidbasics;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,8 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.androidbasics.databinding.ActivityMainBinding;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
-import com.example.androidbasics.psrupload.views.PsrUploadFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("","onOptionsItemSelected");
+        Log.d("", "onOptionsItemSelected");
 
         int id = item.getItemId();
 
@@ -65,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == android.R.id.home || id == androidx.appcompat.R.id.home) {
-            Log.d("","Ha ha ha");
+            Log.d("", "Ha ha ha");
             onToolBarBackPress();
             return true;
         }
@@ -74,22 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
-//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-//        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-//
-//        if (fragment instanceof PsrSubmissionFragment) {
-//            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
-//            if (!yourFragment.showExitConfirmationDialog()) {
-//                Log.d("Palash", "ActionBarBackPressed ");
-//            }
-//        } else if (fragment instanceof PsrUploadFragment) {
-//            PsrUploadFragment yourFragment = (PsrUploadFragment) fragment;
-//                Log.d("Palash", "ActionBarBackPressed ");
-//        } else {
-//            Log.d("Palash", navController.getCurrentDestination().getDisplayName());
-//        }
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
@@ -97,18 +68,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onToolBarBackPress() {
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main    );
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
 
         Log.d("Palash", "onToolBarBackPress ");
 
-        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);;
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof PsrSubmissionFragment) {
-            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
-            yourFragment.showExitConfirmationDialog("Toolbar Back Button");
+//            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
+            ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
+//            yourFragment.showExitConfirmationDialog("Toolbar Back Button");
         } else {
-            Log.d("Palash", navController.getCurrentDestination().getDisplayName());
+            if(navController.getCurrentDestination() != null)
+                Log.d("Palash", navController.getCurrentDestination().getDisplayName());
             super.onBackPressed();
         }
     }

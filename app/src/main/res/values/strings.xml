@@ -48,5 +48,30 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="upload">Upload</string>
+    <string name="upload">UPLOAD</string>
+    <string name="a_c_number">A/C Number :\u0020 </string>
+    <string name="tin">TIN :\u0020 </string>
+    <string name="psr_proof_of_submission_of_return_upload">PSR (Proof of Submission of Return) Upload</string>
+    <string name="name">Name :\u0020 </string>
+    <string name="psr_status">PSR Status :\u0020 </string>
+    <string name="psr_upload">PSR Upload</string>
+    <string name="form_c">Form C</string>
+    <string name="upload_1st_part_of_your_tax_return">Upload 1st part of your tax return</string>
+    <string name="camera">Camera</string>
+    <string name="media">Media</string>
+    <string name="submit">Submit</string>
+    <string name="psr_first_part">psr first part</string>
+    <string name="upload_2nd_part_of_your_tax_return">Upload 2nd part of your tax return</string>
+    <string name="psr_2nd_part">psr 2nd part</string>
+    <string name="merged_psr">merged psr</string>
+    <string name="psr_uploaded_for_branch_approval">PSR Uploaded for Branch Approval</string>
+    <string name="tax_assessment_year">Tax Assessment Year :\u0020</string>
+    <string name="psr_upload_date">PSR Upload Date :\u0020</string>
+    <string name="psr_will_be_updated_for_your_primary_account_as_well_as_other_link_accounts_in_your_wallet">PSR will be updated for your primary account as well as other link accounts in your wallet.</string>
+    <string name="proof_of_submission_of_return">PSR Submitted Successfully</string>
+    <string name="todo">TODO</string>
+    <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="done">DONE</string>
+    <string name="submission_report_viewer">submission report viewer</string>
 </resources>
