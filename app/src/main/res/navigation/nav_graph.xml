@@ -89,12 +89,24 @@
         tools:layout="@layout/fragment_form_c">
 
         <action
-            android:id="@+id/action_enter_psr_module"
-            app:destination="@id/action_home" />
+            android:id="@+id/action_form_c_confrim"
+            app:destination="@id/FormCConfirmFragment" />
 
         <action
             android:id="@+id/action_enter_from_c_module"
             app:destination="@id/action_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FormCConfirmFragment"
+        android:name="com.example.androidbasics.FormC.FormCConfirmFragment"
+        android:label="Confirm Submission"
+        tools:layout="@layout/fragment_form_c">
+
+        <action
+            android:id="@+id/action_form_c_confrim"
+            app:destination="@id/action_home" />
+
     </fragment>
 
 </navigation>

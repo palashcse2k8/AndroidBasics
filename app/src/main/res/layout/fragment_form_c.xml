@@ -49,6 +49,13 @@
             android:hint="Sender Name" />
 
         <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Amount in BDT"/>
+
+        <EditText
             android:id="@+id/sender_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +102,6 @@
             android:padding="10dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
-
     </LinearLayout>
 
     <Button
