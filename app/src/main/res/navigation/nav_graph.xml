@@ -85,16 +85,25 @@
     <fragment
         android:id="@+id/FormCFragment"
         android:name="com.example.androidbasics.FormC.FormCFragment"
-        android:label="Form C Submission"
+        android:label="Form C Information"
         tools:layout="@layout/fragment_form_c">
 
         <action
-            android:id="@+id/action_form_c_confrim"
-            app:destination="@id/FormCConfirmFragment" />
+            android:id="@+id/action_form_c_continue"
+            app:destination="@id/FormCContinueFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/FormCContinueFragment"
+        android:name="com.example.androidbasics.FormC.FormCContinueFragment"
+        android:label="Form C Continue"
+        tools:layout="@layout/fragment_form_c_continue">
 
         <action
-            android:id="@+id/action_enter_from_c_module"
-            app:destination="@id/action_home" />
+            android:id="@+id/action_form_c_confirm"
+            app:destination="@id/FormCConfirmFragment" />
+
     </fragment>
 
     <fragment
@@ -104,9 +113,21 @@
         tools:layout="@layout/fragment_form_c">
 
         <action
-            android:id="@+id/action_form_c_confrim"
-            app:destination="@id/action_home" />
+            android:id="@+id/action_form_c_submission"
+            app:destination="@id/FormCSubmissionFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/FormCSubmissionFragment"
+        android:name="com.example.androidbasics.FormC.FormCSubmissionFragment"
+        android:label="Confirm Submission"
+        tools:layout="@layout/fragment_form_c_submission">
+
+        <action
+            android:id="@+id/action_form_c_toHome"
+            app:destination="@id/ModuleSelectionFragment"
+            app:popUpTo="@id/ModuleSelectionFragment"/>
     </fragment>
 
 </navigation>

@@ -8,13 +8,23 @@ public class FormCViewModel extends ViewModel {
 
     private MutableLiveData<String> name = new MutableLiveData<>();
     private MutableLiveData<String> address = new MutableLiveData<>();
+    private MutableLiveData<String> phoneNumber = new MutableLiveData<>();
     private MutableLiveData<String> countryName = new MutableLiveData<>();
     private MutableLiveData<String> currencyName = new MutableLiveData<>();
     private MutableLiveData<String> purpose = new MutableLiveData<>();
     private MutableLiveData<String> bankName = new MutableLiveData<>();
+    private MutableLiveData<String> amount = new MutableLiveData<>();
+
 
     public LiveData<String> getName () {
         return name;
+    }
+    public LiveData<String> getAmount () {
+        return amount;
+    }
+
+    public LiveData<String> getPhoneNumber () {
+        return phoneNumber;
     }
 
     public LiveData<String> getAddress () {
@@ -37,22 +47,29 @@ public class FormCViewModel extends ViewModel {
         return purpose;
     }
 
-    public void setName(MutableLiveData<String> name) {
-        this.name = name;
+    public void setName(String name) {
+        this.name.setValue(name);
     }
-    public void setAddress(MutableLiveData<String> address) {
-        this.address = address;
+
+    public void setAmount(String amount) {
+        this.amount.setValue(amount);
     }
-    public void setCountryName(MutableLiveData<String> countryName) {
-        this.countryName = countryName;
+    public void setAddress(String address) {
+        this.address.setValue(address);
     }
-    public void setCurrencyName(MutableLiveData<String> currencyName) {
-        this.currencyName = currencyName;
+    public void setCountryName(String countryName) {
+        this.countryName.setValue(countryName);
     }
-    public void setPurpose(MutableLiveData<String> purpose) {
-        this.purpose = purpose;
+    public void setCurrencyName(String currencyName) {
+        this.currencyName.setValue(currencyName);
     }
-    public void setBankName(MutableLiveData<String> bankName) {
-        this.bankName = bankName;
+    public void setPurpose(String purpose) {
+        this.purpose.setValue(purpose);
+    }
+    public void setBankName(String bankName) {
+        this.bankName.setValue(bankName);
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber.setValue(phoneNumber);
     }
 }

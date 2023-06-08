@@ -125,6 +125,28 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
+            android:text="Amount : "/>
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
             android:text="Purpose : "/>
         <TextView
             android:id="@+id/tv_purpose"
@@ -154,28 +176,6 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
-        android:padding="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"
-            android:text="Amount (BDT) : "/>
-        <TextView
-            android:id="@+id/tv_amount"
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
 
     <EditText
         android:layout_width="match_parent"
@@ -183,8 +183,24 @@
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="50dp"
         android:inputType="number"
-        android:hint="Enter Wallet PIN to Continue"/>
+        android:hint="Enter Wallet PIN to Submit"/>
 
+    <LinearLayout
+        android:id="@+id/LinearLayouts02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="50dp"
+            android:text="@string/submit"/>
+    </LinearLayout>
 
 
 </LinearLayout>
