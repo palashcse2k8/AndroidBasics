@@ -11,7 +11,6 @@
 // "The Art of War"
 
 package com.example.androidbasics.imagecropper;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;

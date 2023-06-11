@@ -22,9 +22,11 @@
             <item
                 android:id="@+id/crop_image_menu_flip_horizontally"
                 android:title="@string/crop_image_menu_flip_horizontally"/>
+            <item android:title="@string/crop_image_menu_flip_vertically" />
             <item
                 android:id="@+id/crop_image_menu_flip_vertically"
-                android:title="@string/crop_image_menu_flip_vertically"/>
+                android:title="@string/crop_image_menu_flip_horizontally"/>
+            <item android:title="@string/crop_image_menu_flip_vertically" />
         </menu>
     </item>
     <item
