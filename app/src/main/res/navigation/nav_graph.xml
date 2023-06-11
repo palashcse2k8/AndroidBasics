@@ -41,6 +41,25 @@
         <action
             android:id="@+id/action_psr_merge"
             app:destination="@id/PsrMergerFragment" />
+
+        <action
+            android:id="@+id/action_psr_crop"
+            app:destination="@id/PsrCroppingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PsrCroppingFragment"
+        android:name="com.example.androidbasics.imagecropper.ImageCropperFragment"
+        android:label="@string/psr_fragment_label"
+        tools:layout="@layout/fragment_image_cropper">
+
+        <action
+            android:id="@+id/action_psr_merge"
+            app:destination="@id/PsrMergerFragment" />
+
+        <action
+            android:id="@+id/action_psr_crop"
+            app:destination="@id/PsrMergerFragment" />
     </fragment>
 
     <fragment

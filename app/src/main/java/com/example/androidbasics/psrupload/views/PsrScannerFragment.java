@@ -102,8 +102,11 @@ public class PsrScannerFragment extends Fragment {
                 return;
             }
 
+//            NavHostFragment.findNavController(PsrScannerFragment.this)
+//                    .navigate(R.id.action_psr_merge);
             NavHostFragment.findNavController(PsrScannerFragment.this)
-                    .navigate(R.id.action_psr_merge);
+                    .navigate(R.id.action_psr_crop);
+
         });
 //        binding.btnSubmit.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrScannerFragment.this)
 //                .navigate(R.id.action_psr_merge));

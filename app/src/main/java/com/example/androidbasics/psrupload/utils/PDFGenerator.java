@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
@@ -19,7 +18,52 @@ public class PDFGenerator {
 
     }
 
-    public static void generatePDF(Bitmap bitmap, String tin, String assessmentYear, String date, String fileName) {
+    public static void generatePSRPDF(Bitmap bitmap, String tin, String assessmentYear, String date, String fileName) {
+
+        // postscript size of A4 size paper
+        int pageHeight = 842;
+        int pageWidth = 595;
+        int lineHeight = 100;
+        int textSizeLarge = 25;
+        int textSizeMedium = 20;
+
+        // for our PDF document.
+        PdfDocument pdfDocument = new PdfDocument();
+
+        Paint paint = new Paint();
+        Paint title = new Paint();
+
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
+        PdfDocument.Page myPage = pdfDocument.startPage(myPageInfo);
+        Canvas canvas = myPage.getCanvas();
+
+        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        title.setTextSize(textSizeLarge);
+        title.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("PSR Uploaded for bank approval", pageWidth/2, lineHeight, title);
+        lineHeight = lineHeight + textSizeLarge;
+        title.setTextSize(textSizeMedium);
+        canvas.drawText("TIN: " + tin, pageWidth/2, lineHeight, title);
+        lineHeight = lineHeight + textSizeLarge;
+        canvas.drawText("TAX Assessment Year: " + assessmentYear, pageWidth/2, lineHeight, title);
+        lineHeight = lineHeight + textSizeLarge;
+        canvas.drawText("PSR Upload Date: " + date, pageWidth/2, lineHeight, title);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, 500, 600, false), 40, 200, paint);
+
+        pdfDocument.finishPage(myPage);
+        File file = new File(fileName);
+
+        try {
+            pdfDocument.writeTo(new FileOutputStream(file));
+            Log.d("pdf", "PDF file generated successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pdfDocument.close();
+    }
+
+    public static void generateFormCPDF(Bitmap bitmap, String tin, String assessmentYear, String date, String fileName) {
 
         // postscript size of A4 size paper
         int pageHeight = 842;
