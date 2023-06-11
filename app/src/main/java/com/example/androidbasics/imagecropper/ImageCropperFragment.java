@@ -1,6 +1,12 @@
 package com.example.androidbasics.imagecropper;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.canhub.cropper.CropImage;
 import com.example.androidbasics.databinding.FragmentImageCropperBinding;
 import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +84,36 @@ public class ImageCropperFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.imageView.setImageBitmap(vm.getUser().getValue().psrBitmap);
+        binding.imageView.setOnClickListener(v-> {
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .start(getContext(), this );
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                Bitmap bitmap = null;
+                try {
+                    bitmap =  MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), resultUri);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                if (bitmap != null) {
+                    binding.imageView.setImageBitmap(bitmap);
+                }
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+    }
+
+    public void setBitmap (Uri resultUri) {
 
     }
+
 }
