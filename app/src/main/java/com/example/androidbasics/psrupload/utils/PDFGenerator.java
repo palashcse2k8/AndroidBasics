@@ -60,6 +60,7 @@ public class PDFGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        bitmap.recycle();
         pdfDocument.close();
     }
 
@@ -105,6 +106,7 @@ public class PDFGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        bitmap.recycle();
         pdfDocument.close();
     }
 

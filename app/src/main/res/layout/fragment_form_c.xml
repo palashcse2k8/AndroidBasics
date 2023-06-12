@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -48,19 +48,20 @@
             android:layout_height="wrap_content"
             android:text="Select Country"
             android:textSize="20sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:padding="15dp"
-            android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
 
-        <Spinner
+        <TextView
             android:id="@+id/spinner_currency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
-            android:padding="10dp"
+            android:text="Select Currency"
+            android:textSize="20sp"
+            android:padding="15dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
 
@@ -116,6 +117,6 @@
         android:paddingHorizontal="20dp"
         android:textSize="20sp"
         android:backgroundTint="@color/primaryColor"
-        android:text="CONTINUE >" />
+        android:text="CONTINUE" />
 
 </RelativeLayout>

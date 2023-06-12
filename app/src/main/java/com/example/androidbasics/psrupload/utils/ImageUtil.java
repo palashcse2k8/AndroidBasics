@@ -1,5 +1,6 @@
 package com.example.androidbasics.psrupload.utils;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -49,10 +50,13 @@ public class ImageUtil
         canvas.drawBitmap(left, 0f, 0f, null);
         canvas.drawBitmap(right, left.getWidth(), 0f, null);
 
+        left.recycle();
+        right.recycle();
+
         return combined;
     }
 
-    public static Bitmap combineBitmapsVertically(final Bitmap top, final Bitmap bottom){
+    public static Bitmap combineBitmapsVertically(Bitmap top, Bitmap bottom){
         // Get the size of the images combined side by side.
         if (top == null && bottom != null)
             return bottom;
@@ -62,6 +66,9 @@ public class ImageUtil
 
         if (top == null && bottom == null)
             return null;
+
+        top = Bitmap.createScaledBitmap(top, getScreenWidth(), getScreenHeight()/2, false);
+        bottom = Bitmap.createScaledBitmap(bottom, getScreenWidth(), getScreenHeight()/2, false);
 
         int height = top.getHeight() + bottom.getHeight();
         int width = top.getWidth() > bottom.getWidth() ? top.getWidth() : bottom.getWidth();
@@ -75,7 +82,20 @@ public class ImageUtil
         canvas.drawBitmap(top, 0f, 0f, null);
         canvas.drawBitmap(bottom, 0, top.getHeight(), null);
 
+        combined = Bitmap.createScaledBitmap(combined, getScreenWidth(), getScreenHeight(), false);
+
+        top.recycle();
+        bottom.recycle();
+
         return combined;
+    }
+
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 }
 

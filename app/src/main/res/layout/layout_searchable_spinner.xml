@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Select Country or Search"
+        android:text="Select or Search           "
         />
     <EditText
         android:id="@+id/editText_of_searchableSpinner"

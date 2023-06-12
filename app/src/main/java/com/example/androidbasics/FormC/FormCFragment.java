@@ -1,17 +1,20 @@
 package com.example.androidbasics.FormC;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -70,33 +73,36 @@ public class FormCFragment extends Fragment {
                 updateViewModel();
                 NavHostFragment.findNavController(FormCFragment.this).navigate(R.id.action_form_c_continue);
             } else {
-                Toast toast = Toast.makeText(getContext(), "Please Select All the Fields.", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getContext(), "Please fix the error to continue!", Toast.LENGTH_SHORT);
                 toast.getView().setBackgroundColor(Color.RED);
                 toast.show();
             }
         });
 
-        binding.senderName.getText().toString();
     }
 
     private void updateViewModel() {
         viewModel.setName(binding.senderName.getText().toString());
         viewModel.setAmount(binding.amount.getText().toString());
         viewModel.setCountryName(binding.spinnerCountry.getText().toString());
-        viewModel.setCurrencyName(binding.spinnerCurrency.getSelectedItem().toString());
+        viewModel.setCurrencyName(binding.spinnerCurrency.getText().toString());
     }
 
     private void nameInputTextOnFocusListener() {
-        binding.formCNameContainer.setOnFocusChangeListener((v, hasFocus) -> {
+        Log.d("", "nameInputTextOnFocusListener");
+        binding.senderName.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
+                Log.d("", "Focus changed");
                 binding.formCNameContainer.setHelperText(validateName());
             }
         });
     }
 
     private void amountInputTextOnFocusListener() {
-        binding.formCAmountContainer.setOnFocusChangeListener((v, hasFocus) -> {
+        binding.amount.setOnFocusChangeListener((v, hasFocus) -> {
+            Log.d("", "amountInputTextOnFocusListener");
             if (!hasFocus) {
+                Log.d("", "Focus changed");
                 binding.formCAmountContainer.setHelperText(validateAmount());
             }
         });
@@ -112,6 +118,8 @@ public class FormCFragment extends Fragment {
     public boolean isValid() {
         binding.formCNameContainer.setHelperText(validateName());
         binding.formCAmountContainer.setHelperText(validateAmount());
+        binding.spinnerCountry.setError(validateCountry());
+        binding.spinnerCurrency.setError(validateCurrency());
         return validateName() == null && validateAmount() == null && validateCountry() == null && validateCurrency() == null;
     }
 
@@ -152,7 +160,7 @@ public class FormCFragment extends Fragment {
     }
 
     private String validateCurrency() {
-        String countryName = binding.spinnerCurrency.getSelectedItem().toString();
+        String countryName = binding.spinnerCurrency.getText().toString();
         if (countryName.equals("Select Currency")) {
             return "Please select currency!";
         }
@@ -161,6 +169,70 @@ public class FormCFragment extends Fragment {
         }
 
         return null;
+    }
+
+    public class SearchableDropdown implements View.OnClickListener {
+        List<String> adapterList;
+
+        Context context;
+
+        TextView myTextView;
+
+        Dialog dialog;
+        SearchableDropdown(Context context, View view, List<String> list) {
+            this.adapterList = list;
+            this.context = context;
+            myTextView = (TextView) view;
+        }
+        public void init() {
+            dialog = new Dialog(this.context);
+            //set  (our custom layout for dialog)
+            dialog.setContentView(R.layout.layout_searchable_spinner);
+
+            //set transparent background
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+            //show dialog
+            dialog.show();
+
+            //initialize and assign variable
+            EditText editText = dialog.findViewById(R.id.editText_of_searchableSpinner);
+            ListView listView = dialog.findViewById(R.id.listView_of_searchableSpinner);
+            //array adapter
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this.context,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, this.adapterList);
+            listView.setAdapter(arrayAdapter);
+            //Text-watcher for change data after every text type by user
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    //filter arraylist
+                    arrayAdapter.getFilter().filter(charSequence);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+
+            // listview onitem click listener
+            listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+
+                myTextView.setText(arrayAdapter.getItem(i));
+//                binding.spinnerCountry.setText(arrayAdapter.getItem(i));
+//                        Toast.makeText(getContext(), "Selected:" + arrayAdapter.getItem(i), Toast.LENGTH_SHORT).show();
+                //dismiss dialog after choose
+                dialog.dismiss();
+            });
+        }
+
+        @Override
+        public void onClick(View v) {
+            init();
+        }
     }
 
     public void init() {
@@ -212,7 +284,9 @@ public class FormCFragment extends Fragment {
                         dialog.dismiss();
                     });
                 });
-        binding.spinnerCurrency.setAdapter(currencyAdaptor);
+        binding.spinnerCurrency.setOnClickListener(
+                    new SearchableDropdown(getContext(), binding.spinnerCurrency, getCurrencyList())
+        );
     }
 
     public List<String> getCountryList() {

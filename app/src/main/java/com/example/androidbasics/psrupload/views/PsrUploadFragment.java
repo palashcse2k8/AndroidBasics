@@ -143,9 +143,12 @@ public class PsrUploadFragment extends Fragment {
     public void setText (String Status) {
         if(Status.equalsIgnoreCase(PSRStatus.Updated.name()) || Status.equalsIgnoreCase(PSRStatus.Submitted.name()) ) {
             binding.labelTaxAssessmentStatus.setText(Status);
-            binding.labelTaxAssessmentStatus.setTextColor(Color.GRAY);
+            binding.labelTaxAssessmentStatus.setTextColor(Color.WHITE);
             binding.btnUpload.setVisibility(View.GONE);
         } else {
+            if(Status.equalsIgnoreCase("NotSubmitted")){
+                Status = "Not Submitted";
+            }
             binding.labelTaxAssessmentStatus.setText(Status);
             binding.labelTaxAssessmentStatus.setTextColor(Color.RED);
             binding.btnUpload.setVisibility(View.VISIBLE);
