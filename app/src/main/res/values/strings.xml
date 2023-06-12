@@ -85,4 +85,5 @@
     <string name="crop_image_menu_flip_vertically">Flip vertically</string>
     <string name="pick_image_intent_chooser_title">Select source</string>
     <string name="crop_image_activity_no_permissions">Cancelling, required permissions are not granted</string>
+    <string name="declaration_for_remittance_received_from_foreign_ncountry_of_amount_exceeding_usd_10_000_or_equivalent">DECLARATION FOR REMITTANCE RECEIVED FROM FOREIGN\nCOUNTRY OF AMOUNT EXCEEDING USD 10,000 OR EQUIVALENT</string>
 </resources>

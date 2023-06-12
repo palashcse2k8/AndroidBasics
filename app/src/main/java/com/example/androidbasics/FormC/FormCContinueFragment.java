@@ -2,10 +2,13 @@ package com.example.androidbasics.FormC;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -78,16 +81,44 @@ public class FormCContinueFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void setOnFocusListener() {
+        binding.address.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.formCAddressContainer.setHelperText(validateAddress());
+            }
+        });
+
+        binding.senderPhone.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.formCPhoneContainer.setHelperText(validatePhone());
+            }
+        });
+    }
+
+    private void setSpinnerError(Spinner spinner, String error) {
+        Log.d("setSpinnerError","setSpinnerError with " + error );
+        View selectedView = spinner.getSelectedView();
+        if (selectedView != null && selectedView instanceof TextView) {
+            spinner.requestFocus();
+            TextView selectedTextView = (TextView) selectedView;
+//            selectedTextView.setError("Select anyone!"); // any name of the error will do
+            selectedTextView.setTextColor(Color.RED); //text color in which you want your error message to be displayed
+//            selectedTextView.setText(error); // actual error message
+//            spinner.performClick(); // to open the spinner list if error is found.
+        }
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
+        setOnFocusListener();
         binding.btnContinue.setOnClickListener(v -> {
             if (isValid()) {
                 updateViewModel();
                 NavHostFragment.findNavController(FormCContinueFragment.this).navigate(R.id.action_form_c_confirm);
             } else {
-                Toast toast = Toast.makeText(getContext(), "Please Select All the Fields.", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getContext(), "Please fix the error to continue!", Toast.LENGTH_SHORT);
                 toast.getView().setBackgroundColor(Color.RED);
                 toast.show();
             }
@@ -102,31 +133,45 @@ public class FormCContinueFragment extends Fragment {
     }
 
     private String validatePurpose() {
+        Log.d("","validatePurpose");
         String purpose = binding.spinnerPurpose.getSelectedItem().toString();
+        String errorText = null;
         if (purpose.equals("Select Purpose")) {
-            return "Please select a Purpose!";
+            errorText = "Please select a Purpose!";
         }
         if (purpose == null) {
-            return "Purpose is required!";
+            errorText = "Purpose is required!";
         }
 
-        return null;
+        if (errorText != null)
+            setSpinnerError(binding.spinnerPurpose, errorText);
+
+        Log.d("","validatePurpose " + errorText);
+        return errorText;
     }
 
     private String validateBankName() {
         String bankName = binding.spinnerBankName.getSelectedItem().toString();
+        String errorText = null;
         if (bankName.equals("Select Bank Name")) {
-            return "Please select a Bank!";
+            errorText = "Please select a Bank!";
         }
         if (bankName == null) {
-            return "Bank Name is required!";
+            errorText = "Bank Name is required!";
         }
+        if (errorText != null)
+            setSpinnerError(binding.spinnerBankName, errorText);
 
-        return null;
+        return errorText;
     }
 
     private String validateAddress() {
         String address = binding.address.getText().toString();
+
+        if(address.length() == 0) {
+            return "Address is required!";
+        }
+
         if (address.length() < 5) {
             return "Name should be minimum of 6 characters!";
         }
@@ -139,6 +184,10 @@ public class FormCContinueFragment extends Fragment {
 
     private String validatePhone() {
         String phoneNumber = binding.senderPhone.getText().toString();
+
+        if (phoneNumber.length() == 0) {
+            return "Can't be null!";
+        }
         if (!phoneNumber.matches(".*[0-9].*")) {
             return "Must be all Digits";
         }

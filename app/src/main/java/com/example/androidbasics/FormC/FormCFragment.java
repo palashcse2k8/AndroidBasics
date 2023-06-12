@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,6 @@ import java.util.List;
 public class FormCFragment extends Fragment {
     FragmentFormCBinding binding;
     FormCViewModel viewModel;
-
     Dialog dialog;
 
     public FormCFragment() {
@@ -64,11 +62,8 @@ public class FormCFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        nameInputTextOnFocusListener();
-        amountInputTextOnFocusListener();
-
+        setOnFocusListener();
         binding.buttonContinue.setOnClickListener(v -> {
-
             if (isValid()) {
                 updateViewModel();
                 NavHostFragment.findNavController(FormCFragment.this).navigate(R.id.action_form_c_continue);
@@ -78,7 +73,6 @@ public class FormCFragment extends Fragment {
                 toast.show();
             }
         });
-
     }
 
     private void updateViewModel() {
@@ -88,21 +82,15 @@ public class FormCFragment extends Fragment {
         viewModel.setCurrencyName(binding.spinnerCurrency.getText().toString());
     }
 
-    private void nameInputTextOnFocusListener() {
-        Log.d("", "nameInputTextOnFocusListener");
+    private void setOnFocusListener() {
         binding.senderName.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                Log.d("", "Focus changed");
                 binding.formCNameContainer.setHelperText(validateName());
             }
         });
-    }
 
-    private void amountInputTextOnFocusListener() {
         binding.amount.setOnFocusChangeListener((v, hasFocus) -> {
-            Log.d("", "amountInputTextOnFocusListener");
             if (!hasFocus) {
-                Log.d("", "Focus changed");
                 binding.formCAmountContainer.setHelperText(validateAmount());
             }
         });
@@ -179,11 +167,13 @@ public class FormCFragment extends Fragment {
         TextView myTextView;
 
         Dialog dialog;
+
         SearchableDropdown(Context context, View view, List<String> list) {
             this.adapterList = list;
             this.context = context;
             myTextView = (TextView) view;
         }
+
         public void init() {
             dialog = new Dialog(this.context);
             //set  (our custom layout for dialog)
@@ -285,7 +275,7 @@ public class FormCFragment extends Fragment {
                     });
                 });
         binding.spinnerCurrency.setOnClickListener(
-                    new SearchableDropdown(getContext(), binding.spinnerCurrency, getCurrencyList())
+                new SearchableDropdown(getContext(), binding.spinnerCurrency, getCurrencyList())
         );
     }
 
