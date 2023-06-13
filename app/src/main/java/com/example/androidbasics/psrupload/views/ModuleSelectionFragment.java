@@ -89,9 +89,13 @@ public class ModuleSelectionFragment extends Fragment {
         binding.btnPsrUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(ModuleSelectionFragment.this)
                 .navigate(R.id.action_enter_psr_module));
 
+//        binding.btnFormC.setOnClickListener(view1 -> {
+//            NavHostFragment.findNavController(ModuleSelectionFragment.this)
+//                    .navigate(R.id.action_enter_from_c_module);
+//        });
         binding.btnFormC.setOnClickListener(view1 -> {
             NavHostFragment.findNavController(ModuleSelectionFragment.this)
-                    .navigate(R.id.action_enter_from_c_module);
+                    .navigate(R.id.action_temp);
         });
     }
 

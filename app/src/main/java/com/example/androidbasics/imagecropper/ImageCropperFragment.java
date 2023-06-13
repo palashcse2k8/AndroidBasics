@@ -87,7 +87,7 @@ public class ImageCropperFragment extends Fragment {
         binding.imageView.setOnClickListener(v-> {
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .start(getContext(), this );
+                    .start(getContext(), this , CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
         });
     }
 

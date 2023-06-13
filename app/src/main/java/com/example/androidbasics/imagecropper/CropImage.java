@@ -92,6 +92,9 @@ public final class CropImage {
    * this specific request.
    */
   public static final int CROP_IMAGE_ACTIVITY_REQUEST_CODE = 203;
+  public static final int CROP_IMAGE_REQUEST_FIRST_CODE = 204;
+  public static final int CROP_IMAGE_REQUEST_SECOND_CODE = 205;
+
 
   /** The result code used to return error from {@link CropImageActivity}. */
   public static final int CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE = 204;
@@ -505,8 +508,8 @@ public final class CropImage {
      *
      * @param fragment fragment to receive result
      */
-    public void start(@NonNull Context context, @NonNull Fragment fragment) {
-      fragment.startActivityForResult(getIntent(context), CROP_IMAGE_ACTIVITY_REQUEST_CODE);
+    public void start(@NonNull Context context, @NonNull Fragment fragment, int requestCode) {
+      fragment.startActivityForResult(getIntent(context), requestCode);
     }
 
     /**

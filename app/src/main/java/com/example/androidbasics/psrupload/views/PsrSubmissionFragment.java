@@ -97,7 +97,6 @@ public class PsrSubmissionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
-        PDFGenerator.generatePSRPDF(vm.getUser().getValue().psrBitmap, vm.getUser().getValue().tinNumber, vm.getUser().getValue().selectedAssessmentYear, date, vm.getUser().getValue().fileLocation);
         binding = FragmentPsrSubmissionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -126,6 +125,7 @@ public class PsrSubmissionFragment extends Fragment {
         }
 
         binding.btnDownload.setOnClickListener(v -> {
+            PDFGenerator.generatePSRPDF(vm.getUser().getValue().psrBitmap, vm.getUser().getValue().tinNumber, vm.getUser().getValue().selectedAssessmentYear, date, vm.getUser().getValue().fileLocation);
             NavHostFragment.findNavController(PsrSubmissionFragment.this)
                     .navigate(R.id.action_pdf_view);
         });

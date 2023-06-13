@@ -95,7 +95,7 @@ public class PsrScannerFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(v -> {
             vm.getUser().getValue().setPsr(ImageUtil.combineBitmapsVertically(bitmap1, bitmap2));
 
-            if(bitmap1 == null && bitmap2 == null ){
+            if(bitmap1 == null && bitmap2 == null ) {
                 Toast toast = Toast.makeText(getContext(), "You didn't Select any image", Toast.LENGTH_SHORT);
                 toast.getView().setBackgroundColor(Color.RED);
                 toast.show();
@@ -106,7 +106,6 @@ public class PsrScannerFragment extends Fragment {
                     .navigate(R.id.action_psr_merge);
 //            NavHostFragment.findNavController(PsrScannerFragment.this)
 //                    .navigate(R.id.action_psr_crop);
-
         });
     }
 

@@ -24,12 +24,10 @@ public class PdfViewFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM = "param1";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mParam;
     BitMapResource vm;
 
     Bitmap pdfBitmap;
@@ -42,16 +40,14 @@ public class PdfViewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param fileName Parameter 1.
      * @return A new instance of fragment PdfViewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PdfViewFragment newInstance(String param1, String param2) {
+    public static PdfViewFragment newInstance(String fileName) {
         PdfViewFragment fragment = new PdfViewFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM, fileName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,17 +56,18 @@ public class PdfViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam = getArguments().getString(ARG_PARAM);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layo ut for this fragment
         vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
-        pdfBitmap = PDFGenerator.getPdfFileAsBitmap(vm.getUser().getValue().fileLocation);
+        if(mParam == null)
+            mParam = vm.getUser().getValue().fileLocation;
+        pdfBitmap = PDFGenerator.getPdfFileAsBitmap(mParam);
         binding = FragmentPdfViewBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -78,7 +75,7 @@ public class PdfViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.textViewLocation.setText("File Location : " + vm.getUser().getValue().fileLocation);
+        binding.textViewLocation.setText("File Location : " + mParam);
 
         binding.imageViewPdf.setImageBitmap(pdfBitmap);
     }

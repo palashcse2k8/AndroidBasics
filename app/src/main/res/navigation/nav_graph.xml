@@ -18,6 +18,10 @@
         <action
             android:id="@+id/action_enter_from_c_module"
             app:destination="@id/FormCFragment" />
+
+        <action
+            android:id="@+id/action_temp"
+            app:destination="@id/FormCSubmissionFragment" />
     </fragment>
 
     <fragment
@@ -29,8 +33,26 @@
         <action
             android:id="@+id/action_psr_scanner"
             app:destination="@id/PsrScannerFragment" />
+        <action
+            android:id="@+id/action_psr_image_scanner"
+            app:destination="@id/PsrImageScannerFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/PsrImageScannerFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrImageScannerFragment"
+        android:label="@string/psr_fragment_label"
+        tools:layout="@layout/fragment_psr_image_scanner">
+
+        <action
+            android:id="@+id/action_psr_merge"
+            app:destination="@id/PsrMergerFragment" />
+
+        <action
+            android:id="@+id/action_psr_crop"
+            app:destination="@id/PsrCroppingFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/PsrScannerFragment"
@@ -66,7 +88,7 @@
         android:id="@+id/PsrMergerFragment"
         android:name="com.example.androidbasics.psrupload.views.PsrMergeFragment"
         android:label="@string/psr_fragment_merger_label"
-        tools:layout="@layout/fragment_psr_scanner">
+        tools:layout="@layout/fragment_psr_merge">
 
         <action
             android:id="@+id/action_psr_submission"
@@ -147,6 +169,10 @@
             android:id="@+id/action_form_c_toHome"
             app:destination="@id/ModuleSelectionFragment"
             app:popUpTo="@id/ModuleSelectionFragment"/>
+
+        <action
+            android:id="@+id/action_pdf_view_form_c"
+            app:destination="@id/PdfViewFragment"/>
     </fragment>
 
 </navigation>

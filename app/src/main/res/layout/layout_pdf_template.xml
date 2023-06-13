@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pdfLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,7 +16,7 @@
         <TableLayout android:id="@+id/TableLayout01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#55771B">
+            android:background="@color/black">
 
             <TextView
                 android:id="@+id/TextView01"
@@ -33,7 +34,7 @@
         <TableLayout android:id="@+id/TableLayout02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#55771B">
+            android:background="@color/black">
 
             <TextView
                 android:id="@+id/TextView02"
@@ -51,11 +52,50 @@
         <TableLayout android:id="@+id/TableLayout03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:background="#55771B">
+            android:layout_marginStart="25dp"
+            android:background="@color/black">
 
             <TextView
                 android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:textSize="10sp"
+                android:text="FORM -C" />
+        </TableLayout>
+
+        <TableLayout android:id="@+id/TableLayout04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@color/black">
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:textSize="10sp"
+                android:text="FORM -C" />
+        </TableLayout>
+
+        <TableLayout android:id="@+id/TableLayout05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <TextView
+                android:id="@+id/TextView05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -79,5 +119,43 @@
         android:layout_gravity="center"
         android:textSize="10sp"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I/We do hereby declare that I/we have received remittance of"
+            android:textSize="10sp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:hint="Amount"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:hint="Amount"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Amount and Currency in figures and in words) remitted or"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

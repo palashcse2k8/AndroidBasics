@@ -91,7 +91,7 @@ public class PsrUploadFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.btnUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrUploadFragment.this)
-                .navigate(R.id.action_psr_scanner));
+                .navigate(R.id.action_psr_image_scanner));
 
         vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
 
