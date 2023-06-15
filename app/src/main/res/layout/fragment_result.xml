@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bd.com.sonalibank.sonalie_sheba.ui.ocr.ResultFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="nid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="dob"
+            app:layout_constraintStart_toStartOf="@+id/nid"
+            app:layout_constraintTop_toBottomOf="@+id/nid" />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dob"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/nid_front"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/photo"
+            app:layout_constraintStart_toStartOf="@+id/photo"
+            app:layout_constraintTop_toBottomOf="@+id/photo"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/nid_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/nid_front"
+            app:layout_constraintStart_toStartOf="@+id/nid_front"
+            app:layout_constraintTop_toBottomOf="@+id/nid_front"
+            tools:src="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

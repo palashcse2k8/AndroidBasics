@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:text="next  >"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/nid_front"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/snidfont"
+        app:layout_constraintDimensionRatio="1.6:1"
+        app:layout_constraintBottom_toTopOf="@id/nid_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nid_front_txt"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="@drawable/nid_img_btn_bg"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="24sp"
+        android:text="Upload NID Font Page"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/nid_front"
+        app:layout_constraintStart_toStartOf="@id/nid_front"
+        app:layout_constraintTop_toTopOf="@id/nid_front"
+        app:layout_constraintBottom_toBottomOf="@id/nid_front" />
+
+    <ImageView
+        android:id="@+id/nid_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/snidback"
+        app:layout_constraintDimensionRatio="1.6:1"
+        app:layout_constraintBottom_toTopOf="@id/button_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nid_front" />
+
+    <TextView
+        android:id="@+id/nid_back_txt"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="@drawable/nid_img_btn_bg"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="24sp"
+        android:text="Upload NID Back Page"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/nid_back"
+        app:layout_constraintStart_toStartOf="@id/nid_back"
+        app:layout_constraintTop_toTopOf="@id/nid_back"
+        app:layout_constraintBottom_toBottomOf="@id/nid_back" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.androidbasics.FormC.FormCSubmissionFragment;
 import com.example.androidbasics.databinding.ActivityMainBinding;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
 //            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
             ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
 //            yourFragment.showExitConfirmationDialog("Toolbar Back Button");
+        } else if (fragment instanceof FormCSubmissionFragment){
+            ((FormCSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
         } else {
             if (navController.getCurrentDestination() != null)
                 Log.d("Palash", navController.getCurrentDestination().getDisplayName());

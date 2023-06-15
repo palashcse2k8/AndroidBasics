@@ -21,6 +21,7 @@
             android:padding="10dp"
             android:textSize="20sp"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:text="Foreign Remittance\nDeclaration Form-C or C(ICT)"/>
 
         <TextView
@@ -116,7 +117,6 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:textSize="20sp"
-        android:backgroundTint="@color/primaryColor"
         android:text="CONTINUE" />
 
 </RelativeLayout>

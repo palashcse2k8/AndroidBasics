@@ -2,6 +2,7 @@ package com.example.androidbasics.psrupload.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
@@ -15,7 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class PDFGenerator {
-    PDFGenerator(){
+    PDFGenerator() {
 
     }
 
@@ -41,14 +42,14 @@ public class PDFGenerator {
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         title.setTextSize(textSizeLarge);
         title.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("PSR Uploaded for bank approval", pageWidth/2, lineHeight, title);
+        canvas.drawText("PSR Uploaded for bank approval", pageWidth / 2, lineHeight, title);
         lineHeight = lineHeight + textSizeLarge;
         title.setTextSize(textSizeMedium);
-        canvas.drawText("TIN: " + tin, pageWidth/2, lineHeight, title);
+        canvas.drawText("TIN: " + tin, pageWidth / 2, lineHeight, title);
         lineHeight = lineHeight + textSizeLarge;
-        canvas.drawText("TAX Assessment Year: " + assessmentYear, pageWidth/2, lineHeight, title);
+        canvas.drawText("TAX Assessment Year: " + assessmentYear, pageWidth / 2, lineHeight, title);
         lineHeight = lineHeight + textSizeLarge;
-        canvas.drawText("PSR Upload Date: " + date, pageWidth/2, lineHeight, title);
+        canvas.drawText("PSR Upload Date: " + date, pageWidth / 2, lineHeight, title);
 
         canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, 500, 600, false), 40, 200, paint);
 
@@ -74,14 +75,15 @@ public class PDFGenerator {
         // for our PDF document.
         PdfDocument pdfDocument = new PdfDocument();
 
-        Paint paint = new Paint();
-        Paint title = new Paint();
+        Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
 
         PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
         PdfDocument.Page myPage = pdfDocument.startPage(myPageInfo);
         Canvas canvas = myPage.getCanvas();
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, 500, 600, false), 40, 200, paint);
+        Log.d("", bitmap.getHeight() + " " + bitmap.getWidth() + " " + bitmap.getAllocationByteCount());
+
+        canvas.drawBitmap(bitmap, 0, 0, paint);
 
         pdfDocument.finishPage(myPage);
 
@@ -95,6 +97,24 @@ public class PDFGenerator {
         }
         bitmap.recycle();
         pdfDocument.close();
+    }
+
+    public static Bitmap BITMAP_RESIZER(Bitmap bitmap, int newWidth, int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
     }
 
     public static Bitmap getPdfFileAsBitmap(String filePath) {

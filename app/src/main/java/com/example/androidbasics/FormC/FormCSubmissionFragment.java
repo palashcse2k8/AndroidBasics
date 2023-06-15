@@ -1,14 +1,22 @@
 package com.example.androidbasics.FormC;
 
+import static com.example.androidbasics.psrupload.utils.PDFGenerator.BITMAP_RESIZER;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +25,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +36,9 @@ import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCSubmissionBinding;
 import com.example.androidbasics.psrupload.utils.PDFGenerator;
 import com.example.androidbasics.psrupload.views.PdfViewFragment;
+import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -72,8 +83,34 @@ public class FormCSubmissionFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmationDialog("Back Button");
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+    public boolean showExitConfirmationDialog(String str) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Exit by " + str);
+        builder.setMessage("Are you sure you want to exit?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                NavHostFragment.findNavController(FormCSubmissionFragment.this)
+                        .navigate(R.id.action_form_c_toHome);
+//                requireActivity().onBackPressed();
+            }
+        });
+        builder.setNegativeButton("No", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        return false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,8 +140,19 @@ public class FormCSubmissionFragment extends Fragment {
             bundle.putString("param1", fileName);
 
             NavHostFragment.findNavController(FormCSubmissionFragment.this).navigate(R.id.action_pdf_view_form_c, bundle);
-
         });
+
+        binding.btnShare.setOnClickListener(v-> shareFile());
+    }
+    private void shareFile() {
+
+        String fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/FormC_Complete.pdf";
+        Uri fileUri = FileProvider.getUriForFile(getContext(), "com.scanlibrary.provider.main", new File(fileName));
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(intent, "Share File"));
     }
 
     public void getDataFromViewModel(){
@@ -138,9 +186,12 @@ public class FormCSubmissionFragment extends Fragment {
                 )
         );
         view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        Log.d("display metrics", displayMetrics.widthPixels + " and " + displayMetrics.heightPixels);
+        Log.d("measured", view.getMeasuredWidth() + " and " + view.getMeasuredHeight());
         Bitmap bitmap = Bitmap.createBitmap( view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);
         view.draw(c);
         return Bitmap.createScaledBitmap(bitmap, 595, 842, true);
+//        return BITMAP_RESIZER(bitmap, 595, 842);
     }
 }
