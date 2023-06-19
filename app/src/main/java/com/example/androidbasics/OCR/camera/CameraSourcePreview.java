@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.example.androidbasics.OCR.others.camera;
+package com.example.androidbasics.OCR.camera;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,8 +27,8 @@ import com.google.android.gms.common.images.Size;
 
 import java.io.IOException;
 
-import bd.com.sonalibank.sonalie_sheba.ui.ocr.OCR.Utils;
-import bd.com.sonalibank.sonalie_sheba.ui.ocr.OCR.others.GraphicOverlay;
+import com.example.androidbasics.OCR.Utils;
+import com.example.androidbasics.OCR.others.GraphicOverlay;
 
 public class CameraSourcePreview extends FrameLayout {
 

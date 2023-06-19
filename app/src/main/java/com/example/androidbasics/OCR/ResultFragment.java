@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import bd.com.sonalibank.sonalie_sheba.R;
-import bd.com.sonalibank.sonalie_sheba.utils.Utils;
+import com.example.androidbasics.R;
+import com.example.androidbasics.OCR.others.Utils;
 
 
 public class ResultFragment extends Fragment {
@@ -92,7 +92,5 @@ public class ResultFragment extends Fragment {
         viewPHOTO.setImageBitmap(Utils.getBitmap(view.getContext(),PHOTO));
         viewNID_FRONT.setImageBitmap(Utils.getBitmap(view.getContext(),NID_FRONT));
         viewNID_BACK.setImageBitmap(Utils.getBitmap(view.getContext(),NID_BACK));
-
-
     }
 }

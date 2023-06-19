@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-import bd.com.sonalibank.sonalie_sheba.ui.ocr.OCR.others.GraphicOverlay;
+import com.example.androidbasics.OCR.others.GraphicOverlay;
 
 
 /**

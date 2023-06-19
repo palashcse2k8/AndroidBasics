@@ -13,16 +13,16 @@
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner_view"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:text="Foreign Remittance\nDeclaration Form-C or C(ICT)"/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/rounded_corner_view"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:text="Foreign Remittance\nDeclaration Form-C or C(ICT)"/>-->
 
         <TextView
             android:layout_width="wrap_content"

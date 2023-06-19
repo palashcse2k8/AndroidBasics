@@ -14,6 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.androidbasics.FormC.FormCSubmissionFragment;
+import com.example.androidbasics.OCR.NIDFragment;
+import com.example.androidbasics.OCR.OcrFragment;
 import com.example.androidbasics.databinding.ActivityMainBinding;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
+//        Fragment fragment = new NIDFragment();
+//        String tag = NIDFragment.class.getSimpleName();
+//
+//        getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container_view, fragment, tag).commit();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

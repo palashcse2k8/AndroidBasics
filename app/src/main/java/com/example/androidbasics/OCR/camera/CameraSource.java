@@ -1,4 +1,4 @@
-package com.example.androidbasics.OCR.others.camera;
+package com.example.androidbasics.OCR.camera;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -20,6 +20,7 @@ import com.example.androidbasics.OCR.text_detection.TextRecognitionProcessor;
 import com.google.android.gms.common.images.Size;
 
 import java.io.IOException;
+import java.lang.Thread.State;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -97,7 +98,7 @@ public class CameraSource {
      */
     private Thread processingThread;
 
-    private final FrameProcessingRunnable processingRunnable;
+    private final FrameProcessingRunnable  processingRunnable;
 
     private final Object processorLock = new Object();
     // @GuardedBy("processorLock")

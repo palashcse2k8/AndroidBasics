@@ -1,0 +1,163 @@
+implementation fileTree(dir: "libs", include: ["*.jar","*.aar"])
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.appcompat:appcompat:1.4.1"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.google.code.gson:gson:2.8.8'
+
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    implementation 'org.jsoup:jsoup:1.14.3'
+
+    // Architecture Components
+    implementation "androidx.room:room-runtime:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.4.1"
+    //implementation "androidx.core:core-ktx:1.7.0"
+
+
+    // Android annotation
+    annotationProcessor "org.androidannotations:androidannotations:4.8.0"
+    implementation "org.androidannotations:androidannotations-api:4.8.0"
+
+    // DB debug
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+    // Utility
+    implementation "android.arch.work:work-runtime:1.0.1"
+
+    // for localization
+    implementation 'com.akexorcist:localization:1.2.11'
+
+    // encryption library
+
+    // for circle image view
+
+    // for auto grid layout
+    implementation 'com.github.ceryle:FitGridView:v1.0.5'
+
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation "gun0912.ted:tedpermission:2.2.0"
+
+    implementation 'ch.halcyon:squareprogressbar:1.6.4'
+
+
+//    implementation project(':core')
+
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
+    implementation 'uk.co.jemos.podam:podam:7.1.1.RELEASE'
+    implementation("com.mikepenz:materialdrawer:6.1.2@aar") {
+        transitive = true
+    }
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+//    implementation 'com.tarun0.zxing-standalone:zxing-standalone:1.0.0'
+    // for QR code
+//    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+
+    // Dialog
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+
+    // progressdialog
+
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
+
+    // bottom sheet
+
+//    implementation "com.afollestad.material-dialogs:bottomsheets:$bottomSheetVersion"
+
+    implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+
+    // smart location
+
+    implementation 'io.nlopez.smartlocation:library:3.3.3'
+
+    implementation 'com.github.mudassar1:SearchableSpinner:v1.1'
+
+
+
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
+    implementation 'com.google.firebase:firebase-analytics:20.1.0'
+
+
+
+    // core library
+    // Debug
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    api 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    api 'com.google.firebase:firebase-crashlytics:18.2.8'
+
+    // Utility
+    api 'com.orhanobut:logger:2.2.0'
+    api 'com.blankj:utilcode:1.17.0'
+    api 'org.greenrobot:eventbus:3.3.1'
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    //implementation 'com.google.android.material:material:1.5.0'
+
+    implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
+    // Iconics
+    api "com.mikepenz:iconics-core:5.3.3"
+    api "com.mikepenz:iconics-views:5.3.3"
+    api "com.mikepenz:fontawesome-typeface:5.9.0.2-kotlin@aar"
+
+
+
+    // toasty
+
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+
+    implementation 'androidx.work:work-runtime:2.7.1'
+
+
+    implementation 'org.apache.commons:commons-text:1.6'
+    implementation 'joda-time:joda-time:2.9.4'
+
+
+    implementation "androidx.camera:camera-camera2:1.1.0-beta02"
+    implementation "androidx.camera:camera-lifecycle:1.1.0-beta02"
+    implementation "androidx.camera:camera-view:1.1.0-beta02"
+
+    // qrcode
+    implementation('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.4.1'
+
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'

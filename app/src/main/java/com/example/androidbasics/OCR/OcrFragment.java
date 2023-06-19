@@ -13,18 +13,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.example.androidbasics.R;
+import com.example.androidbasics.OCR.others.GraphicOverlay;
+import com.example.androidbasics.OCR.text_detection.TextRecognitionProcessor;
+
+
+import com.example.androidbasics.OCR.others.Utils;
+import com.example.androidbasics.OCR.camera.CameraSource;
+import com.example.androidbasics.OCR.camera.CameraSourcePreview;
+
+//import com.google.firebase.FirebaseApp;
+
 import java.io.IOException;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import com.example.androidbasics.OCR.others.camera.CameraSource;
-import com.example.androidbasics.OCR.others.camera.CameraSourcePreview;
-import com.example.androidbasics.OCR.others.GraphicOverlay;
-import com.example.androidbasics.OCR.text_detection.TextRecognitionProcessor;
-import com.example.androidbasics.R;
 
 public class OcrFragment extends Fragment implements Action {
 

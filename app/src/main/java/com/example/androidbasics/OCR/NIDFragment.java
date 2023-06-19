@@ -16,10 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.androidbasics.R;
+//import com.example.androidbasics.ui.eye_blink.EyeBlinkFragment;
+import com.example.androidbasics.OCR.others.Utils;
 
-//import bd.com.sonalibank.sonalie_sheba.R;
-//import bd.com.sonalibank.sonalie_sheba.ui.eye_blink.EyeBlinkFragment;
-//import bd.com.sonalibank.sonalie_sheba.utils.Utils;
 
 public class NIDFragment extends Fragment {
 
@@ -61,7 +60,7 @@ public class NIDFragment extends Fragment {
                 String tag = OcrFragment.class.getSimpleName();
 
                fragment.setTargetFragment(NIDFragment.this, OcrFragment.REQ_CODE_OCR);
-               getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, tag).addToBackStack(null).commit();
+               getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment, tag).addToBackStack(null).commit();
 
             }
         });
@@ -73,7 +72,7 @@ public class NIDFragment extends Fragment {
                 String tag = OcrFragment.class.getSimpleName();
 
                 fragment.setTargetFragment(NIDFragment.this, OcrFragment.REQ_CODE_IMG_ONLY);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, tag).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment, tag).addToBackStack(null).commit();
 
             }
         });
@@ -91,8 +90,8 @@ public class NIDFragment extends Fragment {
                 else
                 {
 //                    EyeBlinkFragment fragment = EyeBlinkFragment.newInstance(nid_num, nid_dob, font_nid_fn, back_nid_fn);
-//
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
                 }
             }
         });
