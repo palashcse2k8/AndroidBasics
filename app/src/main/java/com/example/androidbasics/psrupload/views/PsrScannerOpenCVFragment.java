@@ -21,7 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrScannerBinding;
 import com.example.androidbasics.psrupload.utils.ImageUtil;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
@@ -29,15 +29,15 @@ import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PsrScannerFragment#newInstance} factory method to
+ * Use the {@link PsrScannerOpenCVFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PsrScannerFragment extends Fragment {
+public class PsrScannerOpenCVFragment extends Fragment {
 
     private static final int REQUEST_CODE_FIRST = 99;
     private static final int REQUEST_CODE_SECOND = 98;
     FragmentPsrScannerBinding binding;
-    BitMapResource vm;
+    PSRViewModel vm;
 
     Bitmap bitmap1;
     Bitmap bitmap2;
@@ -60,8 +60,8 @@ public class PsrScannerFragment extends Fragment {
      * @return A new instance of fragment PsrScannerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PsrScannerFragment newInstance(String param1, String param2) {
-        PsrScannerFragment fragment = new PsrScannerFragment();
+    public static PsrScannerOpenCVFragment newInstance(String param1, String param2) {
+        PsrScannerOpenCVFragment fragment = new PsrScannerOpenCVFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +69,7 @@ public class PsrScannerFragment extends Fragment {
         return fragment;
     }
 
-    public PsrScannerFragment() {
+    public PsrScannerOpenCVFragment() {
         // Required empty public constructor
     }
 
@@ -102,7 +102,7 @@ public class PsrScannerFragment extends Fragment {
                 return;
             }
 
-            NavHostFragment.findNavController(PsrScannerFragment.this)
+            NavHostFragment.findNavController(PsrScannerOpenCVFragment.this)
                     .navigate(R.id.action_psr_merge);
 //            NavHostFragment.findNavController(PsrScannerFragment.this)
 //                    .navigate(R.id.action_psr_crop);
@@ -114,7 +114,7 @@ public class PsrScannerFragment extends Fragment {
         binding.btnCameraPart2.setOnClickListener(new ScanButtonClickListener(ScanConstants.OPEN_CAMERA, REQUEST_CODE_SECOND));
         binding.btnMediaPart1.setOnClickListener(new ScanButtonClickListener(ScanConstants.OPEN_MEDIA, REQUEST_CODE_FIRST));
         binding.btnMediaPart2.setOnClickListener(new ScanButtonClickListener(ScanConstants.OPEN_MEDIA, REQUEST_CODE_SECOND));
-        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        vm = ViewModelProviders.of(getActivity()).get(PSRViewModel.class);
     }
 
     private class ScanButtonClickListener implements View.OnClickListener {

@@ -5,8 +5,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,29 +20,41 @@ import com.example.androidbasics.FormC.FormCSubmissionFragment;
 import com.example.androidbasics.OCR.NIDFragment;
 import com.example.androidbasics.OCR.OcrFragment;
 import com.example.androidbasics.databinding.ActivityMainBinding;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
+import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
 
+    PSRViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewModel = new ViewModelProvider(this).get(PSRViewModel.class);
         com.example.androidbasics.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        setupActionBar();
 
-//        Fragment fragment = new NIDFragment();
-//        String tag = NIDFragment.class.getSimpleName();
-//
-//        getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container_view, fragment, tag).commit();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        Fragment fragment = new ModuleSelectionFragment();
+        String tag = fragment.getClass().getSimpleName();
+        getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container_view, fragment, tag).commit();
 
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+    }
+    protected void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -59,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == android.R.id.home || id == androidx.appcompat.R.id.home) {
             Log.d("", "Ha ha ha");
-            onToolBarBackPress();
+            onToolBarBackPressNew();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -68,10 +83,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//
+//        return NavigationUI.navigateUp(navController, appBarConfiguration)
+//                || super.onSupportNavigateUp();
 
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        super.onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     public void onToolBarBackPress() {
@@ -92,6 +110,19 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (navController.getCurrentDestination() != null)
                 Log.d("Palash", navController.getCurrentDestination().getDisplayName());
+            super.onBackPressed();
+        }
+    }
+
+    public void onToolBarBackPressNew() {
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
+
+        if (fragment instanceof PsrSubmissionFragment) {
+            ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
+        } else if (fragment instanceof FormCSubmissionFragment){
+            ((FormCSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
+        } else {
             super.onBackPressed();
         }
     }

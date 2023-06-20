@@ -26,13 +26,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+//    dataBinding {
+//        enabled = true
+//    }
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
-
     def fragment_version = "1.5.7"
     implementation "androidx.fragment:fragment:$fragment_version"
     implementation project(path: ':scanlibrary')

@@ -56,17 +56,9 @@
                             android:id="@+id/btn_camera_part1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/camera"
+                            android:text="Select"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"/>
-                        <Button
-                            android:layout_marginStart="10dp"
-                            android:id="@+id/btn_media_part1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/media"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -115,17 +107,9 @@
                             android:id="@+id/btn_camera_part2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/camera"
+                            android:text="Select"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold" />
-                        <Button
-                            android:layout_marginStart="10dp"
-                            android:id="@+id/btn_media_part2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/media"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold"/>
 
                     </LinearLayout>
 

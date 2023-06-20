@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#DBA527</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#FF0000</color>
+    <color name="offwhite">#F2FFFFFF</color>
+    <color name="signupColor">#066e8a</color>
+    <color name="gray">#A0ECECEC</color>
+
+    <color name="background">#65828e</color>
+    <color name="main_color">#ff9a00</color>
+    <color name="main_color_two">#A3066E8A</color>
+    <color name="secondary_color">#3F51B5</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="light_blue">#FF105DAA</color>
+    <color name="thin_blue">#88105DAA</color>
+    <color name="color_input">#FFFFFF</color>
+    <color name="color_backgroun_input">#98E7E7E7</color>
+    <color name="card_dark_blue">#FF041D45 </color>
+    <color name="frameOutside">#50000000</color>
+    <color name="frameBoundary">#FFFFFF</color>
+
 </resources>

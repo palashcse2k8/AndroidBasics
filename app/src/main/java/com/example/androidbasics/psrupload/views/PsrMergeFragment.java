@@ -6,12 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrMergeBinding;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +30,8 @@ public class PsrMergeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    PSRViewModel vm;
 
     public PsrMergeFragment() {
         // Required empty public constructor
@@ -72,13 +74,18 @@ public class PsrMergeFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        BitMapResource vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);;
 
         binding.mergeImageView.setImageBitmap(vm.getUser().getValue().psrBitmap);
 
         binding.btnSubmitFinal.setOnClickListener(v -> {
-            NavHostFragment.findNavController(PsrMergeFragment.this)
-                    .navigate(R.id.action_psr_submission);
+//            NavHostFragment.findNavController(PsrMergeFragment.this)
+//                    .navigate(R.id.action_psr_submission);
+
+            Fragment fragment = new PsrSubmissionFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
         });
     }
 }

@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/PsrScannerFragment"
-        android:name="com.example.androidbasics.psrupload.views.PsrScannerFragment"
+        android:name="com.example.androidbasics.psrupload.views.PsrScannerOpenCVFragment"
         android:label="@string/psr_fragment_label"
         tools:layout="@layout/fragment_psr_scanner">
 

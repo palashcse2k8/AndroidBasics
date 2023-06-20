@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.androidbasics.FormC.FormCFragment;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentModuleSelectionBinding;
 
@@ -86,12 +87,24 @@ public class ModuleSelectionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnPsrUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(ModuleSelectionFragment.this)
-                .navigate(R.id.action_enter_psr_module));
+        binding.btnPsrUpload.setOnClickListener(view1 -> {
+//            NavHostFragment.findNavController(ModuleSelectionFragment.this)
+//                    .navigate(R.id.action_enter_psr_module)
+
+            Fragment fragment = new PsrUploadFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
+        });
 
         binding.btnFormC.setOnClickListener(view1 -> {
-            NavHostFragment.findNavController(ModuleSelectionFragment.this)
-                    .navigate(R.id.action_enter_from_c_module);
+//            NavHostFragment.findNavController(ModuleSelectionFragment.this)
+//                    .navigate(R.id.action_enter_from_c_module);
+
+            Fragment fragment = new FormCFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
         });
 //        binding.btnFormC.setOnClickListener(view1 -> {
 //            NavHostFragment.findNavController(ModuleSelectionFragment.this)

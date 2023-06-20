@@ -17,13 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrSubmissionBinding;
 import com.example.androidbasics.psrupload.utils.PDFGenerator;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,8 +51,7 @@ public class PsrSubmissionFragment extends Fragment {
 
     public String date;
 
-    BitMapResource vm;
-    Toolbar toolbar;
+    PSRViewModel vm;
 
     public PsrSubmissionFragment() {
         // Required empty public constructor
@@ -96,7 +95,7 @@ public class PsrSubmissionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);
         binding = FragmentPsrSubmissionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -126,12 +125,24 @@ public class PsrSubmissionFragment extends Fragment {
 
         binding.btnDownload.setOnClickListener(v -> {
             PDFGenerator.generatePSRPDF(vm.getUser().getValue().psrBitmap, vm.getUser().getValue().tinNumber, vm.getUser().getValue().selectedAssessmentYear, date, vm.getUser().getValue().fileLocation);
-            NavHostFragment.findNavController(PsrSubmissionFragment.this)
-                    .navigate(R.id.action_pdf_view);
+//            NavHostFragment.findNavController(PsrSubmissionFragment.this)
+//                    .navigate(R.id.action_pdf_view);
+
+            Fragment fragment = new PdfViewFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
         });
 
-        binding.btnDone.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrSubmissionFragment.this)
-                .navigate(R.id.action_home));
+        binding.btnDone.setOnClickListener(view1 -> {
+//            NavHostFragment.findNavController(PsrSubmissionFragment.this)
+//                    .navigate(R.id.action_home);
+
+            Fragment fragment = new ModuleSelectionFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).commit();
+
+        });
 
         binding.btnShare.setOnClickListener(v -> shareFile());
     }
@@ -164,9 +175,14 @@ public class PsrSubmissionFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                NavHostFragment.findNavController(PsrSubmissionFragment.this)
-                        .navigate(R.id.action_home);
+//                NavHostFragment.findNavController(PsrSubmissionFragment.this)
+//                        .navigate(R.id.action_home);
 //                requireActivity().onBackPressed();
+
+                Fragment fragment = new ModuleSelectionFragment();
+                String tag = fragment.getClass().getSimpleName();
+                getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).commit();
+
             }
         });
         builder.setNegativeButton("No", null);

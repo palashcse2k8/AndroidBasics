@@ -2,7 +2,6 @@ package com.example.androidbasics.psrupload.views;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,19 +16,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
-import com.example.androidbasics.databinding.FragmentImageCropperBinding;
 import com.example.androidbasics.databinding.FragmentPsrImageScannerBinding;
-import com.example.androidbasics.databinding.FragmentPsrScannerBinding;
 import com.example.androidbasics.imagecropper.CropImage;
 import com.example.androidbasics.imagecropper.CropImageView;
 import com.example.androidbasics.psrupload.utils.ImageUtil;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
-import com.scanlibrary.ScanActivity;
-import com.scanlibrary.ScanConstants;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 import java.io.IOException;
 
@@ -43,7 +38,7 @@ public class PsrImageScannerFragment extends Fragment {
     private static final int REQUEST_CODE_FIRST = 99;
     private static final int REQUEST_CODE_SECOND = 98;
     FragmentPsrImageScannerBinding binding;
-    BitMapResource vm;
+    PSRViewModel vm;
 
     Bitmap bitmap1;
     Bitmap bitmap2;
@@ -91,7 +86,7 @@ public class PsrImageScannerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);
         binding = FragmentPsrImageScannerBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -99,7 +94,7 @@ public class PsrImageScannerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        binding.btnSubmit.setOnClickListener(v -> {
+        binding.buttonNext.setOnClickListener(v -> {
             vm.getUser().getValue().setPsr(ImageUtil.combineBitmapsVertically(bitmap1, bitmap2));
 
             if (bitmap1 == null && bitmap2 == null) {
@@ -109,18 +104,22 @@ public class PsrImageScannerFragment extends Fragment {
                 return;
             }
 
-            NavHostFragment.findNavController(PsrImageScannerFragment.this)
-                    .navigate(R.id.action_psr_merge);
+            Fragment fragment = new PsrMergeFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
+//            NavHostFragment.findNavController(PsrImageScannerFragment.this)
+//                    .navigate(R.id.action_psr_merge);
         });
     }
 
     private void init() {
-        binding.btnCameraPart1.setOnClickListener(v -> {
+        binding.nidFrontTxt.setOnClickListener(v -> {
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .start(getContext(), this, CropImage.CROP_IMAGE_REQUEST_FIRST_CODE);
         });
-        binding.btnCameraPart2.setOnClickListener(v -> {
+        binding.nidBackTxt.setOnClickListener(v -> {
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .start(getContext(), this, CropImage.CROP_IMAGE_REQUEST_SECOND_CODE);
@@ -152,8 +151,8 @@ public class PsrImageScannerFragment extends Fragment {
                 if (bitmap != null) {
 //                    getActivity().getContentResolver().delete(resultUri, null, null);
                     bitmap1 = bitmap;
-                    binding.btnCameraPart1.setVisibility(View.GONE);
-                    binding.imgPart1.setImageBitmap(bitmap);
+                    binding.nidFrontTxt.setVisibility(View.GONE);
+                    binding.nidFront.setImageBitmap(bitmap);
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -171,8 +170,8 @@ public class PsrImageScannerFragment extends Fragment {
                 if (bitmap != null) {
 //                    getActivity().getContentResolver().delete(resultUri, null, null);
                     bitmap2 = bitmap;
-                    binding.btnCameraPart2.setVisibility(View.GONE);
-                    binding.imgPart2.setImageBitmap(bitmap);
+                    binding.nidBackTxt.setVisibility(View.GONE);
+                    binding.nidBack.setImageBitmap(bitmap);
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();

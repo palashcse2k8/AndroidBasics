@@ -1,139 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
-    tools:context=".psrupload.views.PsrScannerFragment">
+    tools:context="com.example.androidbasics.psrupload.views.PsrImageScannerFragment">
 
-    <LinearLayout android:orientation="vertical"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent">
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:text="NEXT  >"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight=".9"
-            android:layout_height="0dp"
-            android:layout_width="match_parent">
+    <ImageView
+        android:id="@+id/nid_front"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintDimensionRatio="1.6:1"
+        app:layout_constraintBottom_toTopOf="@id/nid_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/firstLayout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:padding="20dp"
-                android:orientation="vertical">
+    <TextView
+        android:id="@+id/nid_front_txt"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#BF676767"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="20sp"
+        android:text="Upload Tax Return First Part"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/nid_front"
+        app:layout_constraintStart_toStartOf="@id/nid_front"
+        app:layout_constraintTop_toTopOf="@id/nid_front"
+        app:layout_constraintBottom_toBottomOf="@id/nid_front" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload_1st_part_of_your_tax_return"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"/>
+    <ImageView
+        android:id="@+id/nid_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintDimensionRatio="1.6:1"
+        app:layout_constraintBottom_toTopOf="@id/button_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nid_front" />
 
-                <RelativeLayout
-                    android:id="@+id/rel_layout_img1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/img_part1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#CFC6C6"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/psr_first_part" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-
-                        <Button
-                            android:id="@+id/btn_camera_part1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Select"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold"/>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/thirdLayout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:padding="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload_2nd_part_of_your_tax_return"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"/>
-
-                <RelativeLayout
-                    android:id="@+id/rel_layout_img2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/img_part2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#CFC6C6"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/psr_2nd_part" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
-
-                        <Button
-                            android:id="@+id/btn_camera_part2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Select"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight=".1"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            android:gravity="center">
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:paddingHorizontal="50dp"
-                android:text="@string/submit"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/nid_back_txt"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#BF676767"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="20sp"
+        android:text="Upload Second Part\n (if any)"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/nid_back"
+        app:layout_constraintStart_toStartOf="@id/nid_back"
+        app:layout_constraintTop_toTopOf="@id/nid_back"
+        app:layout_constraintBottom_toBottomOf="@id/nid_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>

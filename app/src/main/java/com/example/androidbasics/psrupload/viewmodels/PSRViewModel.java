@@ -29,7 +29,7 @@ import com.example.androidbasics.psrupload.models.CurrentUser;
 //    }
 //}
 
-public class BitMapResource extends ViewModel {
+public class PSRViewModel extends ViewModel {
 
     private MutableLiveData<CurrentUser> user = new MutableLiveData<>(new CurrentUser());
 

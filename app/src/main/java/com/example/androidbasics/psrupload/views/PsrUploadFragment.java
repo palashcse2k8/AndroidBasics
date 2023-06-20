@@ -11,17 +11,15 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrUploadBinding;
 import com.example.androidbasics.psrupload.models.PSRStatus;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +41,10 @@ public class PsrUploadFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    BitMapResource vm;
+    PSRViewModel vm;
+
+    private String previousTaxSession;
+    private String runningTaxSession;
 
     public PsrUploadFragment() {
         // Required empty public constructor
@@ -90,10 +91,16 @@ public class PsrUploadFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrUploadFragment.this)
-                .navigate(R.id.action_psr_image_scanner));
+//        binding.btnUpload.setOnClickListener(view1 -> NavHostFragment.findNavController(PsrUploadFragment.this)
+//                .navigate(R.id.action_psr_image_scanner));
 
-        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        binding.btnUpload.setOnClickListener(view1 -> {
+            Fragment fragment = new PsrImageScannerFragment();
+            String tag = fragment.getClass().getSimpleName();
+            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+        });
+
+        vm = new ViewModelProvider(this).get(PSRViewModel.class);
 
         binding.labelName.setText(vm.getUser().getValue().fullName);
         binding.labelAcNumber.setText(vm.getUser().getValue().accountNumber);
@@ -101,61 +108,67 @@ public class PsrUploadFragment extends Fragment {
 
         binding.btnUpload.setVisibility(View.GONE);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>( getContext(), R.layout.spinner_item, getAssessmentYear());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, getAssessmentYear());
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinner1.setAdapter(adapter);
         binding.spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0) {
+                if (position != 0) {
                     String item = parent.getItemAtPosition(position).toString();
                     vm.getUser().getValue().setSelectedAssessmentYear(item);
                 }
                 updateStatus(position);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
-    public void updateStatus (int position) {
+    public void updateStatus(int position) {
 
         if (position == 0) {
             binding.btnUpload.setVisibility(View.GONE);
             binding.labelTaxAssessmentStatus.setText("");
+        } else if (position == 1) {
+            setText(getStatus(previousTaxSession));
+        } else if (position == 2) {
+            setText(getStatus(runningTaxSession));
         } else {
-            String psrStatusPreviousYear = vm.getUser().getValue().psrStatusPreviousYear;
-            String psrStatusCurrentYear = vm.getUser().getValue().psrStatusCurrentYear;
-
-            if(position == 1) {
-                setText(psrStatusPreviousYear);
-            } else if (position == 2) {
-                setText(psrStatusCurrentYear);
-            } else {
-                Log.d("","Not in the range");
-            }
+            Log.d("", "Not in the range");
         }
     }
 
+    public String getStatus(String selectedYear) {
+        if (selectedYear.equalsIgnoreCase(previousTaxSession)) {
+            return "Updated";
+        } else if (selectedYear.equalsIgnoreCase(runningTaxSession)) {
+            return "Not Submitted";
+        } else {
+            Log.d("", "Wrong year selected!");
+        }
+        return null;
+    }
 
-    public void setText (String Status) {
-        if(Status.equalsIgnoreCase(PSRStatus.Updated.name()) || Status.equalsIgnoreCase(PSRStatus.Submitted.name()) ) {
-            binding.labelTaxAssessmentStatus.setText(Status);
-            binding.labelTaxAssessmentStatus.setTextColor(Color.WHITE);
+    public void setText(@NonNull String status) {
+        if (status.equalsIgnoreCase(PSRStatus.Updated.name()) || status.equalsIgnoreCase(PSRStatus.Submitted.name())) {
+            binding.labelTaxAssessmentStatus.setText(status);
+            binding.labelTaxAssessmentStatus.setTextColor(Color.GREEN);
             binding.btnUpload.setVisibility(View.GONE);
         } else {
-            if(Status.equalsIgnoreCase("NotSubmitted")){
-                Status = "Not Submitted";
+            if (status.equalsIgnoreCase("NotSubmitted")) {
+                status = "Not Submitted";
             }
-            binding.labelTaxAssessmentStatus.setText(Status);
+            binding.labelTaxAssessmentStatus.setText(status);
             binding.labelTaxAssessmentStatus.setTextColor(Color.RED);
             binding.btnUpload.setVisibility(View.VISIBLE);
         }
     }
 
-    public List<String> getAssessmentYear () {
+    public List<String> getAssessmentYear() {
 
         List<String> assessmentYears = new ArrayList<>();
 
@@ -169,14 +182,17 @@ public class PsrUploadFragment extends Fragment {
         String previousSession;
         String separator = "-";
 
-        if (currentMonth<7) {
-            previousSession = (currentYear - 2) + separator + (currentYear-1);
+        if (currentMonth < 7) {
+            previousSession = (currentYear - 2) + separator + (currentYear - 1);
             currentSession = (currentYear - 1) + separator + currentYear;
         } else {
             previousSession = (currentYear - 1) + separator + currentYear;
             currentSession = (currentYear) + separator + (currentYear + 1);
         }
 //        Log.d("getAssessmentYear : ",previousSession+ " and " + currentSession);
+
+        previousTaxSession = previousSession;
+        runningTaxSession = currentSession;
         assessmentYears.add("Select Tax Assessment Year");
         assessmentYears.add(previousSession);
         assessmentYears.add(currentSession);

@@ -2,7 +2,6 @@ package com.example.androidbasics.psrupload.views;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,10 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentTestBinding;
-import com.example.androidbasics.psrupload.utils.PDFGenerator;
-import com.example.androidbasics.psrupload.viewmodels.BitMapResource;
+import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +29,7 @@ import java.io.InputStream;
 public class TestFragment extends Fragment {
 
     FragmentTestBinding binding;
-    BitMapResource vm;
+    PSRViewModel vm;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,7 +81,7 @@ public class TestFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        vm = ViewModelProviders.of(getActivity()).get(BitMapResource.class);
+        vm = ViewModelProviders.of(getActivity()).get(PSRViewModel.class);
         AssetManager am = getContext().getAssets();
         InputStream is = null;
         try {
