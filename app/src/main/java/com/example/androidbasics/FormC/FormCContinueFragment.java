@@ -14,11 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCContinueBinding;
+import com.example.androidbasics.psrupload.views.PsrUploadFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +78,7 @@ public class FormCContinueFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProviders.of(getActivity()).get(FormCViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(FormCViewModel.class);
         binding = FragmentFormCContinueBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -116,7 +118,12 @@ public class FormCContinueFragment extends Fragment {
         binding.btnContinue.setOnClickListener(v -> {
             if (isValid()) {
                 updateViewModel();
-                NavHostFragment.findNavController(FormCContinueFragment.this).navigate(R.id.action_form_c_confirm);
+
+                Fragment fragment = new FormCConfirmFragment();
+                String tag = fragment.getClass().getSimpleName();
+                getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
+//                NavHostFragment.findNavController(FormCContinueFragment.this).navigate(R.id.action_form_c_confirm);
             } else {
                 Toast toast = Toast.makeText(getContext(), "Please fix the error to continue!", Toast.LENGTH_SHORT);
                 toast.getView().setBackgroundColor(Color.RED);
@@ -173,7 +180,7 @@ public class FormCContinueFragment extends Fragment {
         }
 
         if (address.length() < 5) {
-            return "Name should be minimum of 6 characters!";
+            return "Address should be minimum of 6 characters!";
         }
         if (address == null) {
             return "Address is required!";

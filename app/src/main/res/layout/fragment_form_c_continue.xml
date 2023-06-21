@@ -6,14 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingTop="50dp"
+    android:layout_marginHorizontal="@dimen/horizontal_margin"
     tools:context=".FormC.FormCContinueFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/form_c_address_container"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         app:errorEnabled="true"
         android:layout_height="wrap_content"
@@ -26,6 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="Address"
             android:inputType="text"
+            android:maxLength="50"
             android:lines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,7 +33,6 @@
         android:id="@+id/form_c_phone_container"
         app:counterMaxLength="11"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         app:errorEnabled="true"
         android:layout_height="wrap_content"
@@ -50,25 +48,30 @@
             android:maxLength="11"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spinner_purpose"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="8dp"
-        android:padding="10dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border">
 
-    <Spinner
-        android:id="@+id/spinner_bank_name"
+        <Spinner
+            android:id="@+id/spinner_purpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="8dp"
-        android:padding="10dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:background="@drawable/border">
+
+        <Spinner
+            android:id="@+id/spinner_bank_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayouts02"

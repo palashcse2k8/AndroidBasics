@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/horizontal_margin"
     android:orientation="vertical"
     tools:context=".FormC.FormCConfirmFragment">
 
@@ -36,12 +37,34 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="201dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/name" />
         <TextView
             android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Mobile No. :" />
+        <TextView
+            android:id="@+id/tv_number"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"/>
@@ -176,15 +199,24 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-
-    <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/form_c_phone_container"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-        android:layout_marginTop="50dp"
-        android:layout_marginHorizontal="50dp"
-        android:inputType="number"
-        android:hint="Enter Wallet PIN to Submit"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:helperTextTextColor="@color/design_default_color_error">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_wallet_pin"
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+            android:inputType="number"
+            android:hint="ENTER WALLET PIN"
+            android:maxLength="6"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayouts02"

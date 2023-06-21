@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -117,11 +118,11 @@ public class PsrSubmissionFragment extends Fragment {
         binding.labelTaxAssessmentYear.setText(vm.getUser().getValue().selectedAssessmentYear);
         binding.labelUploadDate.setText(date);
 
-        try {
-            binding.ivTick.setImageBitmap(getBitmapFromAsset("tik_mark.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            binding.ivTick.setImageBitmap(getBitmapFromAsset("tik_mark.png"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         binding.btnDownload.setOnClickListener(v -> {
             PDFGenerator.generatePSRPDF(vm.getUser().getValue().psrBitmap, vm.getUser().getValue().tinNumber, vm.getUser().getValue().selectedAssessmentYear, date, vm.getUser().getValue().fileLocation);
@@ -137,14 +138,17 @@ public class PsrSubmissionFragment extends Fragment {
         binding.btnDone.setOnClickListener(view1 -> {
 //            NavHostFragment.findNavController(PsrSubmissionFragment.this)
 //                    .navigate(R.id.action_home);
-
-            Fragment fragment = new ModuleSelectionFragment();
-            String tag = fragment.getClass().getSimpleName();
-            getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).commit();
-
+            goToHome ();
         });
 
         binding.btnShare.setOnClickListener(v -> shareFile());
+    }
+
+    public void goToHome () {
+        Fragment fragment = new ModuleSelectionFragment();
+        String tag = fragment.getClass().getSimpleName();
+        getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(false).replace(R.id.fragment_container_view, fragment, tag).commit();
     }
 
     public String getCurrentDate() {
@@ -178,11 +182,7 @@ public class PsrSubmissionFragment extends Fragment {
 //                NavHostFragment.findNavController(PsrSubmissionFragment.this)
 //                        .navigate(R.id.action_home);
 //                requireActivity().onBackPressed();
-
-                Fragment fragment = new ModuleSelectionFragment();
-                String tag = fragment.getClass().getSimpleName();
-                getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).commit();
-
+                goToHome ();
             }
         });
         builder.setNegativeButton("No", null);

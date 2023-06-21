@@ -75,6 +75,8 @@ public class PsrUploadFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);
+
     }
 
     @Override
@@ -99,8 +101,6 @@ public class PsrUploadFragment extends Fragment {
             String tag = fragment.getClass().getSimpleName();
             getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
         });
-
-        vm = new ViewModelProvider(this).get(PSRViewModel.class);
 
         binding.labelName.setText(vm.getUser().getValue().fullName);
         binding.labelAcNumber.setText(vm.getUser().getValue().accountNumber);

@@ -62,6 +62,7 @@ public class PsrMergeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);;
     }
 
     @Override
@@ -74,7 +75,6 @@ public class PsrMergeFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);;
 
         binding.mergeImageView.setImageBitmap(vm.getUser().getValue().psrBitmap);
 

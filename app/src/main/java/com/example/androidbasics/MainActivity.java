@@ -7,18 +7,15 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.androidbasics.FormC.FormCSubmissionFragment;
-import com.example.androidbasics.OCR.NIDFragment;
-import com.example.androidbasics.OCR.OcrFragment;
+import com.example.androidbasics.FormC.FormCViewModel;
 import com.example.androidbasics.databinding.ActivityMainBinding;
 import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;
@@ -28,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
 
-    PSRViewModel viewModel;
+    PSRViewModel psrViewModel;
+    FormCViewModel formCViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(PSRViewModel.class);
+        psrViewModel = new ViewModelProvider(this).get(PSRViewModel.class);
+        formCViewModel = new ViewModelProvider(this).get(FormCViewModel.class);
         com.example.androidbasics.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

@@ -95,7 +95,6 @@ public class PsrImageScannerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         init();
         binding.buttonNext.setOnClickListener(v -> {
-            vm.getUser().getValue().setPsr(ImageUtil.combineBitmapsVertically(bitmap1, bitmap2));
 
             if (bitmap1 == null && bitmap2 == null) {
                 Toast toast = Toast.makeText(getContext(), "You didn't Select any image", Toast.LENGTH_SHORT);
@@ -103,6 +102,8 @@ public class PsrImageScannerFragment extends Fragment {
                 toast.show();
                 return;
             }
+
+            vm.getUser().getValue().setPsr(ImageUtil.combineBitmapsVertically(bitmap1, bitmap2));
 
             Fragment fragment = new PsrMergeFragment();
             String tag = fragment.getClass().getSimpleName();
@@ -151,7 +152,8 @@ public class PsrImageScannerFragment extends Fragment {
                 if (bitmap != null) {
 //                    getActivity().getContentResolver().delete(resultUri, null, null);
                     bitmap1 = bitmap;
-                    binding.nidFrontTxt.setVisibility(View.GONE);
+//                    binding.nidFrontTxt.setVisibility(View.GONE);
+                    binding.nidFrontTxt.setText("Reload");
                     binding.nidFront.setImageBitmap(bitmap);
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -170,7 +172,8 @@ public class PsrImageScannerFragment extends Fragment {
                 if (bitmap != null) {
 //                    getActivity().getContentResolver().delete(resultUri, null, null);
                     bitmap2 = bitmap;
-                    binding.nidBackTxt.setVisibility(View.GONE);
+//                    binding.nidBackTxt.setVisibility(View.GONE);
+                    binding.nidBackTxt.setText("Reload");
                     binding.nidBack.setImageBitmap(bitmap);
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/mergeImageView"
-        android:paddingTop="10dp"
-        android:paddingBottom="65dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="65dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
@@ -24,5 +25,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
         android:textSize="15sp"
+        android:fontFamily="@font/nikosh"
+        android:textAllCaps="true"
         android:text="@string/submit" />
 </RelativeLayout>

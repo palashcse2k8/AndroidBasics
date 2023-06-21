@@ -59,10 +59,10 @@ public class ImageUtil
     public static Bitmap combineBitmapsVertically(Bitmap top, Bitmap bottom){
         // Get the size of the images combined side by side.
         if (top == null && bottom != null)
-            return bottom;
+            return Bitmap.createScaledBitmap(bottom, getScreenWidth(), getScreenHeight()/2, false);
 
         if (bottom == null && top != null)
-            return top;
+            return Bitmap.createScaledBitmap(top, getScreenWidth(), getScreenHeight()/2, false);;
 
         if (top == null && bottom == null)
             return null;
@@ -82,7 +82,7 @@ public class ImageUtil
         canvas.drawBitmap(top, 0f, 0f, null);
         canvas.drawBitmap(bottom, 0, top.getHeight(), null);
 
-        combined = Bitmap.createScaledBitmap(combined, getScreenWidth(), getScreenHeight(), false);
+        combined = Bitmap.createScaledBitmap(combined, getScreenWidth(), getScreenHeight()/2, false);
 
         top.recycle();
         bottom.recycle();

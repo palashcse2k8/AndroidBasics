@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -35,6 +36,7 @@ import android.widget.LinearLayout;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCSubmissionBinding;
 import com.example.androidbasics.psrupload.utils.PDFGenerator;
+import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;
 import com.example.androidbasics.psrupload.views.PdfViewFragment;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
@@ -99,11 +101,14 @@ public class FormCSubmissionFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                NavHostFragment.findNavController(FormCSubmissionFragment.this)
-                        .navigate(R.id.action_form_c_toHome);
+
+                goToHome();
+//                NavHostFragment.findNavController(FormCSubmissionFragment.this)
+//                        .navigate(R.id.action_form_c_toHome);
 //                requireActivity().onBackPressed();
             }
         });
+
         builder.setNegativeButton("No", null);
 
         AlertDialog dialog = builder.create();
@@ -112,10 +117,17 @@ public class FormCSubmissionFragment extends Fragment {
         return false;
     }
 
+    public void goToHome () {
+        Fragment fragment = new ModuleSelectionFragment();
+        String tag = fragment.getClass().getSimpleName();
+        getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(false).replace(R.id.fragment_container_view, fragment, tag).commit();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = ViewModelProviders.of(getActivity()).get(FormCViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(FormCViewModel.class);
         binding = FragmentFormCSubmissionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -125,7 +137,8 @@ public class FormCSubmissionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getDataFromViewModel();
         binding.btnDone.setOnClickListener(v-> {
-            NavHostFragment.findNavController(FormCSubmissionFragment.this).navigate(R.id.action_form_c_toHome);
+            goToHome();
+//            NavHostFragment.findNavController(FormCSubmissionFragment.this).navigate(R.id.action_form_c_toHome);
         });
 
 

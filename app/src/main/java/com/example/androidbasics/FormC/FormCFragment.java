@@ -18,11 +18,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCBinding;
+import com.example.androidbasics.psrupload.views.PsrUploadFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +56,7 @@ public class FormCFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = ViewModelProviders.of(getActivity()).get(FormCViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(FormCViewModel.class);
         binding = FragmentFormCBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -66,7 +68,11 @@ public class FormCFragment extends Fragment {
         binding.buttonContinue.setOnClickListener(v -> {
             if (isValid()) {
                 updateViewModel();
-                NavHostFragment.findNavController(FormCFragment.this).navigate(R.id.action_form_c_continue);
+//                NavHostFragment.findNavController(FormCFragment.this).navigate(R.id.action_form_c_continue);
+                Fragment fragment = new FormCContinueFragment();
+                String tag = fragment.getClass().getSimpleName();
+                getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
+
             } else {
                 Toast toast = Toast.makeText(getContext(), "Please fix the error to continue!", Toast.LENGTH_SHORT);
                 toast.getView().setBackgroundColor(Color.RED);
