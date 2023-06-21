@@ -76,7 +76,7 @@
     <string name="submission_report_viewer">submission report viewer</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="crop_image_activity_title"></string>
+    <string name="crop_image_activity_title" />
     <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
     <string name="crop_image_menu_rotate_right">Rotate</string>
     <string name="crop_image_menu_crop">Crop</string>
@@ -86,4 +86,6 @@
     <string name="pick_image_intent_chooser_title">Select source</string>
     <string name="crop_image_activity_no_permissions">Cancelling, required permissions are not granted</string>
     <string name="declaration_for_remittance_received_from_foreign_ncountry_of_amount_exceeding_usd_10_000_or_equivalent">DECLARATION FOR REMITTANCE RECEIVED FROM FOREIGN\nCOUNTRY OF AMOUNT EXCEEDING USD 10,000 OR EQUIVALENT</string>
+    <string name="place_the_nid_font_page_into_frame_and_take_photo">place the NID font page into frame and take photo</string>
+    <string name="click">click</string>
 </resources>

@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="place the NID font page into frame and take photo"
+        android:text="@string/place_the_nid_font_page_into_frame_and_take_photo"
         android:textStyle="bold"
         android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,8 @@
         android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/clickBtn"
@@ -75,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
 
-        android:text="click"
+        android:text="@string/click"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
