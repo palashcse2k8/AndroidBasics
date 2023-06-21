@@ -28,14 +28,7 @@
                 android:id="@+id/graphics_overlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-
         </com.example.androidbasics.OCR.camera.CameraSourcePreview>
-
-        <!-- <com.dhimu.ocr_ekyc.OCR.others.GraphicOverlay
-             android:id="@+id/graphics_overlay"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent" />-->
 
         <ProgressBar
             android:id="@+id/progressBar"

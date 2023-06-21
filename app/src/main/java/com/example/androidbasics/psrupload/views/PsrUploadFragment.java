@@ -14,14 +14,26 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidbasics.R;
+import com.example.androidbasics.apihandle.ApiService;
+import com.example.androidbasics.apihandle.MessageHeader;
+import com.example.androidbasics.apihandle.PayLoad;
+import com.example.androidbasics.apihandle.RequestModel;
+import com.example.androidbasics.apihandle.ResponseModel;
 import com.example.androidbasics.databinding.FragmentPsrUploadBinding;
 import com.example.androidbasics.psrupload.models.PSRStatus;
 import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -149,6 +161,62 @@ public class PsrUploadFragment extends Fragment {
             return "Not Submitted";
         } else {
             Log.d("", "Wrong year selected!");
+        }
+        return null;
+    }
+
+    public String getStatusFromAPI() {
+
+        try {
+            String baseUrl = "http://10.10.2.42:9797/SBLWalletBanking/v1/";
+            String deviceId = "abc";
+
+            // Create Retrofit instance
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            // Create an instance of your API service
+            ApiService apiService = retrofit.create(ApiService.class);
+
+            // Create the request payload
+            RequestModel requestModel = new RequestModel();
+            PayLoad payLoad = new PayLoad("01921621655", "2022-2023");
+            MessageHeader messageHeader = new MessageHeader("FETCH_SUBMITTED_RETURN", "12345", "SBLWallet", "e2930c5d-77f3-40bd-aebd-2c1fd6832b33", "2022-12-26T11:32:16.685", "android", "1.0.0");
+
+            // Set the request payload values
+            requestModel.setMessageHeader(messageHeader);
+            requestModel.setPayLoad((List<PayLoad>) payLoad);
+
+            Gson gson = new Gson();
+            String jsonPayload = gson.toJson(requestModel);
+            String base64Request = "";
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                base64Request = Base64.getEncoder().encodeToString(jsonPayload.getBytes());
+            } else {
+                base64Request = org.apache.commons.codec.binary.Base64.encodeBase64String(jsonPayload.getBytes());
+            }
+
+            // Make the API call
+            Call<ResponseModel> call = apiService.fetchSubmittedReturn(deviceId, base64Request);
+            Response<ResponseModel> response = call.execute();
+
+            if (response.isSuccessful()) {
+                // Handle successful response
+                ResponseModel responseModel = response.body();
+                Log.d("response.body", response.body().toString());
+                // Access the response values
+                String status = responseModel.getStatus();
+                String message = responseModel.getMessage();
+                List<ResponseModel.SubmittedReturn> submittedReturns = responseModel.getSubmittedReturns();
+                // Handle the response data
+                // ...
+            } else {
+                Log.d("response.code", String.valueOf(response.code()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
