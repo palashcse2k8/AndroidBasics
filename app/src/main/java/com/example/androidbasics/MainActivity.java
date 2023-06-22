@@ -1,18 +1,28 @@
 package com.example.androidbasics;
 
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.androidbasics.FormC.FormCSubmissionFragment;
 import com.example.androidbasics.FormC.FormCViewModel;
@@ -21,9 +31,10 @@ import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;
 import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
+//    private AppBarConfiguration appBarConfiguration;
 
     PSRViewModel psrViewModel;
     FormCViewModel formCViewModel;
@@ -40,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         setupActionBar();
 
+        checkPermissions(permissions);
+
         Fragment fragment = new ModuleSelectionFragment();
         String tag = fragment.getClass().getSimpleName();
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container_view, fragment, tag).commit();
@@ -49,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
     }
+
     protected void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -91,27 +105,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-    public void onToolBarBackPress() {
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-
-        Log.d("Palash", "onToolBarBackPress ");
-
-        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-
-        if (fragment instanceof PsrSubmissionFragment) {
-//            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
-            ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
-//            yourFragment.showExitConfirmationDialog("Toolbar Back Button");
-        } else if (fragment instanceof FormCSubmissionFragment){
-            ((FormCSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
-        } else {
-            if (navController.getCurrentDestination() != null)
-                Log.d("Palash", navController.getCurrentDestination().getDisplayName());
-            super.onBackPressed();
-        }
-    }
+//    public void onToolBarBackPress() {
+//
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+//
+//        Log.d("Palash", "onToolBarBackPress ");
+//
+//        assert navHostFragment != null;
+//        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+//
+//        if (fragment instanceof PsrSubmissionFragment) {
+////            PsrSubmissionFragment yourFragment = (PsrSubmissionFragment) fragment;
+//            ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
+////            yourFragment.showExitConfirmationDialog("Toolbar Back Button");
+//        } else if (fragment instanceof FormCSubmissionFragment) {
+//            ((FormCSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
+//        } else {
+//            if (navController.getCurrentDestination() != null)
+//                Log.d("Palash", navController.getCurrentDestination().getDisplayName());
+//            super.onBackPressed();
+//        }
+//    }
 
     public void onToolBarBackPressNew() {
 
@@ -119,10 +134,63 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragment instanceof PsrSubmissionFragment) {
             ((PsrSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
-        } else if (fragment instanceof FormCSubmissionFragment){
+        } else if (fragment instanceof FormCSubmissionFragment) {
             ((FormCSubmissionFragment) fragment).showExitConfirmationDialog("Toolbar Back Button");
         } else {
             super.onBackPressed();
+        }
+    }
+
+
+    private static final int PERMISSION_REQUEST_CODE = 200;
+
+    String[] permissions = new String[]{CAMERA, MANAGE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
+
+    private void checkPermissions(String[] permissions) {
+
+        Log.d("Palash", "check permission called");
+        for (String permission : permissions) {
+            int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                requestPermission();
+            }
+        }
+    }
+
+    private void requestPermission() {
+        Log.d("Palash", "requestPermission called");
+        ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+    }
+
+
+    private void showMessageOKCancel(DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage("You need to allow access to both the permissions")
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String [] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                if (accepted)
+                    Toast.makeText(this, "Permission Granted, You can access.", Toast.LENGTH_SHORT).show();
+                else {
+
+                    Toast.makeText(this, "Permission not Granted, You can't access.", Toast.LENGTH_SHORT).show();
+
+                    if (shouldShowRequestPermissionRationale(permissions[0])) {
+                        showMessageOKCancel(
+                                (dialog, which) -> requestPermission());
+                    }
+                }
+            }
         }
     }
 }

@@ -1,26 +1,12 @@
 package com.example.androidbasics.psrupload.views;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.FormC.FormCFragment;
 import com.example.androidbasics.R;
@@ -72,7 +58,7 @@ public class ModuleSelectionFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        checkPermissions(permissions);
+
     }
 
     @Override
@@ -110,69 +96,5 @@ public class ModuleSelectionFragment extends Fragment {
 //            NavHostFragment.findNavController(ModuleSelectionFragment.this)
 //                    .navigate(R.id.action_temp);
 //        });
-    }
-
-    private static final int PERMISSION_REQUEST_CODE = 200;
-
-    String[] permissions = new String[]{CAMERA, MANAGE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
-
-    private void checkPermissions(String[] permissions) {
-
-        Log.d("Palash", "check permission called");
-        for (int i = 0; i < permissions.length; i++) {
-            int result = ContextCompat.checkSelfPermission(getContext(), permissions[i]);
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                requestPermission();
-            }
-        }
-    }
-
-    private void requestPermission() {
-        Log.d("Palash", "requestPermission called");
-        ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
-    }
-
-
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(getContext())
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    boolean accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-
-                    if (accepted)
-                        Toast.makeText(getContext(), "Permission Granted, You can access.", Toast.LENGTH_SHORT).show();
-                    else {
-
-                        Toast.makeText(getContext(), "Permission not Granted, You can't access.", Toast.LENGTH_SHORT).show();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(permissions[0])) {
-                                showMessageOKCancel("You need to allow access to both the permissions",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermission();
-                                                }
-                                            }
-                                        });
-                                return;
-                            }
-                        }
-                    }
-                }
-                break;
-        }
     }
 }

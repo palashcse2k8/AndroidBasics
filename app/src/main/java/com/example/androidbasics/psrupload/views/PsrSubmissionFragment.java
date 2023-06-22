@@ -1,5 +1,6 @@
 package com.example.androidbasics.psrupload.views;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,12 +15,11 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrSubmissionBinding;
@@ -138,13 +138,21 @@ public class PsrSubmissionFragment extends Fragment {
         binding.btnDone.setOnClickListener(view1 -> {
 //            NavHostFragment.findNavController(PsrSubmissionFragment.this)
 //                    .navigate(R.id.action_home);
-            goToHome ();
+            goToHome();
         });
 
         binding.btnShare.setOnClickListener(v -> shareFile());
     }
 
-    public void goToHome () {
+    private static final int PERMISSION_REQUEST_CODE = 123;
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(requireActivity(),
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PERMISSION_REQUEST_CODE);
+    }
+
+    public void goToHome() {
         Fragment fragment = new ModuleSelectionFragment();
         String tag = fragment.getClass().getSimpleName();
         getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -182,7 +190,7 @@ public class PsrSubmissionFragment extends Fragment {
 //                NavHostFragment.findNavController(PsrSubmissionFragment.this)
 //                        .navigate(R.id.action_home);
 //                requireActivity().onBackPressed();
-                goToHome ();
+                goToHome();
             }
         });
         builder.setNegativeButton("No", null);

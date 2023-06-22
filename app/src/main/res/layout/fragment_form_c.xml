@@ -15,86 +15,84 @@
         android:layout_marginHorizontal="@dimen/horizontal_margin"
         android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:text="Enter Remittance Information "
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="@string/enter_remittance_information"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <View
-                android:id="@+id/verticalSeparator"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="#DBA527" />
+        <View
+            android:id="@+id/verticalSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#DBA527" />
 
-            <TextView
-                android:id="@+id/spinner_country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/border"
-                android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                android:padding="15dp"
-                android:spinnerMode="dropdown"
-                android:text="Select Country"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/spinner_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border"
+            android:padding="15dp"
+            android:spinnerMode="dropdown"
+            android:text="@string/select_country"
+            android:textSize="20sp"
+            app:drawableRightCompat="@drawable/baseline_arrow_drop_down_24" />
 
-            <TextView
-                android:id="@+id/spinner_currency"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/border"
-                android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                android:padding="15dp"
-                android:spinnerMode="dropdown"
-                android:text="Select Currency"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/spinner_currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/border"
+            android:padding="15dp"
+            android:spinnerMode="dropdown"
+            android:text="@string/select_currency"
+            android:textSize="20sp"
+            app:drawableRightCompat="@drawable/baseline_arrow_drop_down_24" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/form_c_amount_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                app:helperText="Required"
-                app:helperTextTextColor="@color/design_default_color_error">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/form_c_amount_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:helperText="Required"
+            app:helperTextTextColor="@color/design_default_color_error">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Amount"
-                    android:inputType="numberDecimal"
-                    android:lines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/form_c_name_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:counterMaxLength="10"
-                app:errorEnabled="true"
-                app:helperText="Required"
-                app:helperTextTextColor="@color/design_default_color_error">
+                android:hint="@string/amount"
+                android:inputType="numberDecimal"
+                android:lines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sender_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Sender Name"
-                    android:inputType="text"
-                    android:lines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/form_c_name_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterMaxLength="10"
+            app:errorEnabled="true"
+            app:helperText="Required"
+            app:helperTextTextColor="@color/design_default_color_error">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sender_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sender_name"
+                android:inputType="text"
+                android:lines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -107,6 +105,6 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:textSize="20sp"
-        android:text="CONTINUE" />
+        android:text="Continue" />
 
 </RelativeLayout>

@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
@@ -20,7 +19,8 @@ public class PDFGenerator {
 
     }
 
-    public static void generatePSRPDF(Bitmap bitmap, String tin, String assessmentYear, String date, String fileName) {
+    public static void generatePSRPDF(Bitmap bitmap, String tin, String assessmentYear, String
+            date, String fileName) {
 
         // postscript size of A4 size paper
         int pageHeight = 842;
