@@ -109,7 +109,8 @@ public class PsrUploadFragment extends Fragment {
 //                .navigate(R.id.action_psr_image_scanner));
 
         binding.btnUpload.setOnClickListener(view1 -> {
-            Fragment fragment = new PsrImageScannerFragment();
+//            Fragment fragment = new PsrImageScannerFragment();
+            Fragment fragment = new PsrImageScannerFragmentNew();
             String tag = fragment.getClass().getSimpleName();
             getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
         });

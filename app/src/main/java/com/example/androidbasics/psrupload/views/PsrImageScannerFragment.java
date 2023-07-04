@@ -182,34 +182,5 @@ public class PsrImageScannerFragment extends Fragment {
         } else {
             Log.d("myTag", "onActivityResult else");
         }
-
-
-//        if (requestCode == REQUEST_CODE_FIRST && resultCode == Activity.RESULT_OK) {
-//            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-//            Bitmap bitmap = null;
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-//                getActivity().getContentResolver().delete(uri, null, null);
-//                bitmap1 = bitmap;
-//                binding.btnCameraPart1.setVisibility(View.GONE);
-//                binding.imgPart1.setImageBitmap(bitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else if (requestCode == REQUEST_CODE_SECOND && resultCode == Activity.RESULT_OK) {
-//            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-//            Bitmap bitmap = null;
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-//                getActivity().getContentResolver().delete(uri, null, null);
-//                bitmap2 = bitmap;
-//                binding.btnCameraPart2.setVisibility(View.GONE);
-//                binding.imgPart2.setImageBitmap(bitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-//            Log.d("myTag", "onActivityResult else");
-//        }
     }
 }

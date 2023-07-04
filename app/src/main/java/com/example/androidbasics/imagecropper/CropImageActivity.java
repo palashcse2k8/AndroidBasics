@@ -309,6 +309,7 @@ public class CropImageActivity extends AppCompatActivity
     finish();
   }
 
+
   /** Cancel of cropping activity. */
   protected void setResultCancel() {
     setResult(RESULT_CANCELED);

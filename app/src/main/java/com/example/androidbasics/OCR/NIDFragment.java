@@ -59,9 +59,8 @@ public class NIDFragment extends Fragment {
                 Fragment fragment = new OcrFragment();
                 String tag = OcrFragment.class.getSimpleName();
 
-               fragment.setTargetFragment(NIDFragment.this, OcrFragment.REQ_CODE_OCR);
+               fragment.setTargetFragment(NIDFragment.this, OcrFragment.REQ_CODE_IMG_ONLY);
                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment, tag).addToBackStack(null).commit();
-
             }
         });
 

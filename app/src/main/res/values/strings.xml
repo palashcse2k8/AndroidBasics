@@ -76,7 +76,7 @@
     <string name="submission_report_viewer">submission report viewer</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="crop_image_activity_title" />
+    <string name="crop_image_activity_title">Crop Window</string>
     <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
     <string name="crop_image_menu_rotate_right">Rotate</string>
     <string name="crop_image_menu_crop">Crop</string>
@@ -95,4 +95,6 @@
     <string name="select_country">Select Country</string>
     <string name="sender_name">Sender Name</string>
     <string name="continue_text">CONTINUE</string>
+    <string name="crop_image_activity_no_camera_permissions">Camera Permission Required!</string>
+    <string name="crop_image_activity_load_image_error">Load Image Error!</string>
 </resources>

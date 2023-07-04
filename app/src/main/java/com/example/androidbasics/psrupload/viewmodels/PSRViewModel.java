@@ -33,6 +33,24 @@ public class PSRViewModel extends ViewModel {
 
     private MutableLiveData<CurrentUser> user = new MutableLiveData<>(new CurrentUser());
 
+    private MutableLiveData<Bitmap> bitmap1 = new MutableLiveData<>();
+
+    public LiveData<Bitmap> getBitmap1 (){
+        return bitmap1;
+    }
+    public void setBitMap1(Bitmap bitmap){
+        bitmap1.setValue(bitmap);
+    }
+
+    private MutableLiveData<Bitmap> bitmap2 = new MutableLiveData<>();
+
+    public LiveData<Bitmap> getBitmap2 (){
+        return bitmap2;
+    }
+    public void setBitMap2(Bitmap bitmap){
+        bitmap2.setValue(bitmap);
+    }
+
     public LiveData<CurrentUser> getUser () {
         return user;
     }

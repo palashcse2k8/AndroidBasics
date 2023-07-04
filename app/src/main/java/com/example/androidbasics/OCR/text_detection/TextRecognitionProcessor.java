@@ -88,10 +88,10 @@ public class TextRecognitionProcessor implements FrameProcessor {
     @Override
     public void process(ByteBuffer data, FrameMetadata frameMetadata, GraphicOverlay graphicOverlay) throws Exception {
         //graphicOverlay.clear();
-
-        /*this.data = data;
-        this.frameMetadata = frameMetadata;
-        this.graphicOverlay = graphicOverlay;*/
+//
+//        this.data = data;
+//        this.frameMetadata = frameMetadata;
+//        this.graphicOverlay = graphicOverlay;
 
 //        FirebaseVisionImageMetadata metadata =
 //                new FirebaseVisionImageMetadata.Builder()
