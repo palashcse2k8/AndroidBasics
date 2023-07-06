@@ -1,7 +1,5 @@
 package com.example.androidbasics.FormC;
 
-import static com.example.androidbasics.psrupload.utils.PDFGenerator.BITMAP_RESIZER;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,18 +10,6 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,14 +17,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCSubmissionBinding;
 import com.example.androidbasics.psrupload.utils.PDFGenerator;
 import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;
-import com.example.androidbasics.psrupload.views.PdfViewFragment;
-import com.example.androidbasics.psrupload.views.PsrSubmissionFragment;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -152,7 +143,7 @@ public class FormCSubmissionFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("param1", fileName);
 
-            NavHostFragment.findNavController(FormCSubmissionFragment.this).navigate(R.id.action_pdf_view_form_c, bundle);
+//            NavHostFragment.findNavController(FormCSubmissionFragment.this).navigate(R.id.action_pdf_view_form_c, bundle);
         });
 
         binding.btnShare.setOnClickListener(v-> shareFile());
