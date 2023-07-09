@@ -12,7 +12,7 @@ public interface ApiService {
             "Content-Type: application/json"
     })
     @POST("fetchSubmittedReturn")
-    Call<ResponseModel> fetchSubmittedReturn(
+    Call<QueryResponseModel> fetchSubmittedReturn(
             @Header("deviceId") String deviceId,
             @Body String base64Request
     );

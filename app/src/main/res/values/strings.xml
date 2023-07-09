@@ -45,4 +45,5 @@
     <string name="crop_image_activity_no_camera_permissions">Camera Permission Required!</string>
     <string name="crop_image_activity_load_image_error">Load Image Error!</string>
     <string name="psr_upload_list"><u>PSR Upload List</u> :</string>
+    <string name="details"><u>Details</u></string>
 </resources>

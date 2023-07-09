@@ -42,7 +42,7 @@ public class ModuleSelectionFragment extends Fragment {
 //            NavHostFragment.findNavController(ModuleSelectionFragment.this)
 //                    .navigate(R.id.action_enter_psr_module)
 
-            Fragment fragment = new PsrUploadFragment();
+            Fragment fragment = new PsrUploadMainFragment();
             String tag = fragment.getClass().getSimpleName();
             getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
 
