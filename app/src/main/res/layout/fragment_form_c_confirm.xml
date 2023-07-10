@@ -31,8 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -51,10 +50,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -73,10 +71,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -95,10 +92,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -116,10 +112,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -137,10 +132,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -159,10 +153,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -180,10 +173,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginHorizontal="10dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/border"
         android:padding="10dp"
         android:orientation="horizontal">
 
@@ -200,13 +192,12 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/form_c_phone_container"
+        android:id="@+id/form_c_wallet_pin_container"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        app:helperTextTextColor="@color/design_default_color_error">
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -214,7 +205,7 @@
             android:id="@+id/tv_wallet_pin"
             style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
             android:inputType="number"
-            android:hint="ENTER WALLET PIN"
+            android:hint="@string/enter_wallet_pin"
             android:maxLength="6"/>
     </com.google.android.material.textfield.TextInputLayout>
 

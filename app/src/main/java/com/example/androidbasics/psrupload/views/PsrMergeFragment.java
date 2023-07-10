@@ -1,11 +1,14 @@
 package com.example.androidbasics.psrupload.views;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,11 +16,6 @@ import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrMergeBinding;
 import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PsrMergeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PsrMergeFragment extends Fragment {
     FragmentPsrMergeBinding binding;
 
@@ -30,7 +28,8 @@ public class PsrMergeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);;
+        vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Submit PSR");
     }
 
     @Override
@@ -46,10 +45,19 @@ public class PsrMergeFragment extends Fragment {
 
         binding.mergeImageView.setImageBitmap(vm.getUser().getValue().psrBitmap);
 
+        binding.tvTermsCondition.setOnClickListener(v -> {
+            binding.checkbox.setChecked(!binding.checkbox.isChecked());
+        });
         binding.btnSubmitFinal.setOnClickListener(v -> {
 //            NavHostFragment.findNavController(PsrMergeFragment.this)
-//                    .navigate(R.id.action_psr_submission);
+//                    .navigate(R.id.action_psr_submission)
 
+            if(!binding.checkbox.isChecked()){
+                Toast toast = Toast.makeText(getContext(), "Please check the terms and conditions!", Toast.LENGTH_SHORT);
+                toast.getView().setBackgroundColor(Color.RED);
+                toast.show();
+                return;
+            }
             Fragment fragment = new PsrSubmissionFragment();
             String tag = fragment.getClass().getSimpleName();
             getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();

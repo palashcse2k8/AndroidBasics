@@ -1,0 +1,29 @@
+[
+  {
+    "mobileNo": "01726925300",
+    "customerName": "Md. Mosiur Rahman",
+    "primaryAccount": "1312801024500",
+    "tin": "123456789012",
+    "assessmentYear": "2021-2022",
+    "trStatus": "Updated",
+    "trUploadDate": "2023-06-15T11:24:13.000"
+  },
+  {
+    "mobileNo": "01726925300",
+    "customerName": "Md. Mosiur Rahman",
+    "primaryAccount": "1312801024500",
+    "tin": "123456789012",
+    "assessmentYear": "2021-2022",
+    "trStatus": "Rejected",
+    "trUploadDate": "2023-06-14T11:24:13.000"
+  },
+  {
+    "mobileNo": "01726925300",
+    "customerName": "Md. Mosiur Rahman",
+    "primaryAccount": "1312801024500",
+    "tin": "123456789012",
+    "assessmentYear": "2021-2022",
+    "trStatus": "Rejected",
+    "trUploadDate": "2023-06-13T11:24:13.000"
+  }
+]

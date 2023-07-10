@@ -1,8 +1,5 @@
 package com.example.androidbasics.psrupload.views;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -24,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.androidbasics.MainActivity;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrImageScannerBinding;
-//import com.example.androidbasics.imagecropper.CropImage;
 import com.example.androidbasics.imagecropper.CropImageNew;
 import com.example.androidbasics.imagecropper.CropImageView;
 import com.example.androidbasics.psrupload.utils.ImageUtil;
@@ -32,47 +28,11 @@ import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 
 import java.io.IOException;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PsrImageScannerFragmentNew#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PsrImageScannerFragmentNew extends Fragment {
 
-    private static final int REQUEST_CODE_FIRST = 99;
-    private static final int REQUEST_CODE_SECOND = 98;
     FragmentPsrImageScannerBinding binding;
     PSRViewModel vm;
-
-    Bitmap bitmap1;
-    Bitmap bitmap2;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PsrScannerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PsrImageScannerFragmentNew newInstance(String param1, String param2) {
-        PsrImageScannerFragmentNew fragment = new PsrImageScannerFragmentNew();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Bitmap bitmap1, bitmap2;
 
     public PsrImageScannerFragmentNew() {
         // Required empty public constructor
@@ -83,10 +43,10 @@ public class PsrImageScannerFragmentNew extends Fragment {
         super.onCreate(savedInstanceState);
         vm = new ViewModelProvider(requireActivity()).get(PSRViewModel.class);
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener(CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING,this, new FragmentResultListener() {
+        requireActivity().getSupportFragmentManager().setFragmentResultListener(CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                if(requestKey == CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING) {
+                if (requestKey == CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING) {
 
                     CropImageNew.ActivityResult activityResult = result.getParcelable(CropImageNew.CROP_IMAGE_EXTRA_RESULT);
                     Log.d("", "First Result Received for First Call");
@@ -110,10 +70,10 @@ public class PsrImageScannerFragmentNew extends Fragment {
             }
         });
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener(CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING,this, new FragmentResultListener() {
+        requireActivity().getSupportFragmentManager().setFragmentResultListener(CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                if(requestKey == CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING) {
+                if (requestKey == CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING) {
 
                     CropImageNew.ActivityResult activityResult = result.getParcelable(CropImageNew.CROP_IMAGE_EXTRA_RESULT);
                     Log.d("", "Result Received For 2nd Call");
@@ -136,29 +96,23 @@ public class PsrImageScannerFragmentNew extends Fragment {
                 }
             }
         });
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
     public void updateView() {
-        if(vm.getBitmap1().getValue() != null) {
+        if (vm.getBitmap1().getValue() != null) {
             binding.nidFrontTxt.setText("Reload");
             binding.nidFront.setImageBitmap(vm.getBitmap1().getValue());
             bitmap1 = vm.getBitmap1().getValue();
         }
 
-        if(vm.getBitmap2().getValue() != null) {
+        if (vm.getBitmap2().getValue() != null) {
             binding.nidBackTxt.setText("Reload");
             binding.nidBack.setImageBitmap(vm.getBitmap2().getValue());
             bitmap2 = vm.getBitmap2().getValue();
         }
     }
 
-    public void setActionBarTitle (CharSequence title) {
+    public void setActionBarTitle(CharSequence title) {
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
@@ -169,7 +123,7 @@ public class PsrImageScannerFragmentNew extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("","scanner onCreateView");
+        Log.d("", "scanner onCreateView");
         binding = FragmentPsrImageScannerBinding.inflate(inflater, container, false);
         setActionBarTitle("Upload PSR Photo");
         return binding.getRoot();
@@ -179,6 +133,19 @@ public class PsrImageScannerFragmentNew extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         updateView();
         init();
+    }
+
+    private void init() {
+        binding.nidFrontTxt.setOnClickListener(v -> {
+            CropImageNew.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .startFragment((MainActivity) getActivity(), this, CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING);
+        });
+        binding.nidBackTxt.setOnClickListener(v -> {
+            CropImageNew.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .startFragment((MainActivity) getActivity(), this, CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING);
+        });
         binding.buttonNext.setOnClickListener(v -> {
 
             if (bitmap1 == null && bitmap2 == null) {
@@ -198,19 +165,6 @@ public class PsrImageScannerFragmentNew extends Fragment {
 
 //            NavHostFragment.findNavController(PsrImageScannerFragment.this)
 //                    .navigate(R.id.action_psr_merge);
-        });
-    }
-
-    private void init() {
-        binding.nidFrontTxt.setOnClickListener(v -> {
-            CropImageNew.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .startFragment((MainActivity)getActivity(), this, CropImageNew.CROP_IMAGE_REQUEST_FIRST_CODE_STRING);
-        });
-        binding.nidBackTxt.setOnClickListener(v -> {
-            CropImageNew.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .startFragment((MainActivity)getActivity(), this, CropImageNew.CROP_IMAGE_REQUEST_SECOND_CODE_STRING);
         });
     }
 

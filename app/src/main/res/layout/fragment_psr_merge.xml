@@ -1,29 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".psrupload.views.PsrMergeFragment">
 
-    <ImageView
-        android:id="@+id/mergeImageView"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="8">
+
+        <ImageView
+            android:id="@+id/mergeImageView"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:text="@string/hello_blank_fragment"
+            android:contentDescription="@string/merged_psr" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="400dp"
-        android:contentDescription="@string/merged_psr"
-        android:scaleType="fitCenter" />
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
 
-    <Button
-        android:id="@+id/btn_submit_final"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mergeImageView"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/nikosh"
-        android:paddingHorizontal="50dp"
-        android:text="@string/submit"
-        android:textAllCaps="true"
-        android:textSize="15sp" />
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="10">
+
+            <CheckBox
+                android:id="@id/checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8" />
+            <TextView
+                android:id="@+id/tv_terms_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_weight="2"
+                android:text="@string/terms_and_condition_text"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit_final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/default_fontSize"
+            android:fontFamily="@font/nikosh"
+            android:textAllCaps="true"
+            android:text="@string/submit" />
+    </LinearLayout>
+
+</LinearLayout>

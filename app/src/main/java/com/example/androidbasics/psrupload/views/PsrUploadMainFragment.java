@@ -1,38 +1,27 @@
 package com.example.androidbasics.psrupload.views;
+
 import static com.example.androidbasics.psrupload.utils.DateTimeUtil.getSimpleDate;
 import static com.example.androidbasics.psrupload.utils.DateTimeUtil.getSimpleTime;
+import static com.example.androidbasics.psrupload.utils.JsonParser.getAssessmentResultsList;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.apihandle.QueryResponseModel;
 import com.example.androidbasics.databinding.FragmentPsrUploadMainBinding;
 import com.example.androidbasics.psrupload.utils.ListViewAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class PsrUploadMainFragment extends Fragment {
 
@@ -43,11 +32,10 @@ public class PsrUploadMainFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        responseModelList = getAssessmentResultList();
+        responseModelList = getAssessmentResultsList(getContext());
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Proof of Submission of Return");
     }
 
@@ -83,13 +71,16 @@ public class PsrUploadMainFragment extends Fragment {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.layout_psr_listview_item_detail, null);
-        dialogBuilder.setTitle("PSR Uploaded Info");
+//        dialogBuilder.setTitle("PSR Uploaded Info");
         dialogBuilder.setNegativeButton("Close", (dialog, which) -> {
             dialog.cancel();
         });
         dialogBuilder.setView(dialogView);
 
-        TextView lblDetailStatus = (TextView) dialogView.findViewById(R.id.lblDetailName);
+        TextView lblDetailName = (TextView) dialogView.findViewById(R.id.lblDetailName);
+        lblDetailName.setText(responseModelList.get(index).getCustomerName());
+
+        TextView lblDetailStatus = (TextView) dialogView.findViewById(R.id.lblDetailStatus);
         lblDetailStatus.setText(responseModelList.get(index).getTrStatus());
 
         TextView lblDetailTin = (TextView) dialogView.findViewById(R.id.lblDetailTin);
@@ -118,43 +109,5 @@ public class PsrUploadMainFragment extends Fragment {
 //            Log.d("", "no title found!");
 //        }
         alertDialog.show();
-    }
-    public List<QueryResponseModel> getAssessmentResultList() {
-        ArrayList<QueryResponseModel> queryResponseModels = new ArrayList<>();
-
-        try {
-            // Read JSON file from assets folder
-            InputStream inputStream = getContext().getAssets().open("query_response.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            String json = new String(buffer, "UTF-8");
-            //Log.d("json data", json.toString());
-
-            // Parse JSON data
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                // Create QueryResponseModel object and add to the list
-                QueryResponseModel responseModel = new QueryResponseModel();
-                responseModel.setMobileNo(jsonObject.getString("mobileNo"));
-                responseModel.setCustomerName(jsonObject.getString("customerName"));
-                responseModel.setAssessmentYear(jsonObject.getString("assessmentYear"));
-                responseModel.setTin(jsonObject.getString("tin"));
-                responseModel.setTrStatus(jsonObject.getString("trStatus"));
-                responseModel.setTrUploadDate(jsonObject.getString("trUploadDate"));
-                responseModel.setPrimaryAccount(jsonObject.getString("primaryAccount"));
-                // Set other fields similarly
-
-                queryResponseModels.add(responseModel);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-       // Log.d("queryResponseModels", queryResponseModels.toString());
-        return queryResponseModels;
     }
 }
