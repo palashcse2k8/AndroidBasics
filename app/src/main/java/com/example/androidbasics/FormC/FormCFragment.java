@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,24 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCBinding;
-import com.example.androidbasics.psrupload.views.PsrUploadFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FormCFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FormCFragment extends Fragment {
     FragmentFormCBinding binding;
     FormCViewModel viewModel;
@@ -44,18 +39,14 @@ public class FormCFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FormCFragment newInstance(String param1, String param2) {
-        return new FormCFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Form-C/Form-C (ICT)");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(FormCViewModel.class);
         binding = FragmentFormCBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -65,11 +56,17 @@ public class FormCFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         init();
         setOnFocusListener();
-        binding.buttonContinue.setOnClickListener(v -> {
+        binding.btnSubmitFinal.setOnClickListener(v -> {
             if (isValid()) {
                 updateViewModel();
+                if (!binding.checkbox.isChecked()) {
+                    Toast toast = Toast.makeText(getContext(), "Please check the terms and conditions!", Toast.LENGTH_SHORT);
+                    toast.getView().setBackgroundColor(Color.RED);
+                    toast.show();
+                    return;
+                }
 //                NavHostFragment.findNavController(FormCFragment.this).navigate(R.id.action_form_c_continue);
-                Fragment fragment = new FormCContinueFragment();
+                Fragment fragment = new FormCConfirmFragment();
                 String tag = fragment.getClass().getSimpleName();
                 getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
 
@@ -86,6 +83,10 @@ public class FormCFragment extends Fragment {
         viewModel.setAmount(binding.amount.getText().toString());
         viewModel.setCountryName(binding.spinnerCountry.getText().toString());
         viewModel.setCurrencyName(binding.spinnerCurrency.getText().toString());
+        viewModel.setAddress(binding.address.getText().toString());
+        viewModel.setPurpose(binding.spinnerPurpose.getText().toString());
+        viewModel.setPhoneNumber(binding.senderPhone.getText().toString());
+        viewModel.setBankName(binding.spinnerBankName.getText().toString());
     }
 
     private void setOnFocusListener() {
@@ -95,10 +96,26 @@ public class FormCFragment extends Fragment {
             }
         });
 
+        binding.senderPhone.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.formCPhoneContainer.setHelperText(validatePhone());
+            }
+        });
+
+        binding.address.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                binding.formCAddressContainer.setHelperText(validateAddress());
+            }
+        });
+
         binding.amount.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 binding.formCAmountContainer.setHelperText(validateAmount());
             }
+        });
+
+        binding.tvTermsCondition.setOnClickListener(v -> {
+            binding.checkbox.setChecked(!binding.checkbox.isChecked());
         });
     }
 
@@ -110,15 +127,31 @@ public class FormCFragment extends Fragment {
     }
 
     public boolean isValid() {
-        binding.formCNameContainer.setHelperText(validateName());
-        binding.formCAmountContainer.setHelperText(validateAmount());
-        binding.spinnerCountry.setError(validateCountry());
-        binding.spinnerCurrency.setError(validateCurrency());
-        return validateName() == null && validateAmount() == null && validateCountry() == null && validateCurrency() == null;
+        String helperText = "";
+        helperText = validateName();
+        binding.formCNameContainer.setHelperText(helperText);
+        helperText = validatePhone();
+        binding.formCPhoneContainer.setHelperText(helperText);
+        helperText = validatePhone();
+        binding.formCAddressContainer.setHelperText(helperText);
+        helperText = validateCountry();
+        binding.spinnerCountry.setError(helperText);
+        helperText = validateBankName();
+        binding.spinnerBankName.setError(helperText);
+        helperText = validatePurpose();
+        binding.spinnerPurpose.setError(helperText);
+        helperText = validateCurrency();
+        binding.spinnerCurrency.setError(helperText);
+        helperText = validateAmount();
+        binding.formCAmountContainer.setHelperText(helperText);
+
+//        Log.d("helperText", helperText);
+
+        return helperText == null;
     }
 
     private String validateName() {
-        String senderName = binding.senderName.getText().toString();
+        String senderName = Objects.requireNonNull(binding.senderName.getText()).toString();
         if (senderName.length() < 5) {
             return "Name should be minimum of 6 characters";
         }
@@ -129,12 +162,74 @@ public class FormCFragment extends Fragment {
         return null;
     }
 
+    private String validatePurpose() {
+        Log.d("", "validatePurpose");
+        String purpose = binding.spinnerPurpose.getText().toString();
+        String errorText = null;
+        if (purpose.equals("Select Purpose")) {
+            errorText = "Please select a Purpose!";
+        }
+        if (purpose == null) {
+            errorText = "Purpose is required!";
+        }
+
+        return errorText;
+    }
+
+    private String validateBankName() {
+        String bankName = binding.spinnerBankName.getText().toString();
+        String errorText = null;
+        if (bankName.equals("Select Bank Name")) {
+            errorText = "Please select a Bank!";
+        }
+        if (bankName == null) {
+            errorText = "Bank Name is required!";
+        }
+        return errorText;
+    }
+
+    private String validateAddress() {
+        String address = binding.address.getText().toString();
+
+        if (address.length() == 0) {
+            return "Address is required!";
+        }
+
+        if (address.length() < 5) {
+            return "Address should be minimum of 6 characters!";
+        }
+        if (address == null) {
+            return "Address is required!";
+        }
+
+        return null;
+    }
+
+    private String validatePhone() {
+        String phoneNumber = binding.senderPhone.getText().toString();
+
+        if (phoneNumber.length() == 0) {
+            return "Can't be null!";
+        }
+        if (!phoneNumber.matches(".*[0-9].*")) {
+            return "Must be all Digits";
+        }
+        if (phoneNumber.length() != 11) {
+            return "Must be 11 Digits";
+        }
+
+//        if (PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)) {
+//            return "Its not a valid phone number";
+//        }
+        return null;
+    }
+
     private String validateAmount() {
         String amount = binding.amount.getText().toString();
         if (amount.length() < 5) {
             return "Amount should be minimum of 5 digits";
         }
-        if (amount == null) {
+        if (amount == null && amount.isEmpty()) {
             return "Amount is required!";
         }
 
@@ -163,6 +258,28 @@ public class FormCFragment extends Fragment {
         }
 
         return null;
+    }
+
+    public List<String> getPurposeList() {
+
+        List<String> countryList = new ArrayList<>();
+
+        String list[] = new String[]{"Travel", "Food", "Family", "ICT", "Travel", "Food", "Family", "ICT"};
+
+        countryList.add("Select Purpose");
+        countryList.addAll(Arrays.asList(list));
+        return countryList;
+    }
+
+    public List<String> getBankList() {
+
+        List<String> countryList = new ArrayList<>();
+
+        String list[] = new String[]{"AB Bank Limited", "Agrani Bank Limited", "Al-Arafah Islami Bank Limited", "Bangladesh Commerce Bank Limited", "Bangladesh Development Bank Limited", "Bangladesh Krishi Bank", "Bank Al-Falah Limited", "Bank Asia Limited", "BASIC Bank Limited", "Bengal Commercial Bank Limited", "BRAC Bank Limited", "Citibank N.A", "Citizens Bank PLC", "Commercial Bank of Ceylon Limited", "Community Bank Bangladesh Limited", "Dhaka Bank Limited", "Dutch-Bangla Bank Limited", "Eastern Bank Limited", "EXIM Bank Limited", "First Security Islami Bank Limited", "Global Islami Bank Limited", "Habib Bank Ltd.", "ICB Islamic Bank Ltd.", "IFIC Bank PLC", "Islami Bank Bangladesh Ltd", "Jamuna Bank Ltd", "Janata Bank Limited", "Meghna Bank Limited", "Mercantile Bank Limited", "Midland Bank Limited", "Modhumoti Bank Limited", "Mutual Trust Bank Limited", "National Bank Limited", "National Bank of Pakistan", "National Credit & Commerce Bank Ltd", "NRB Bank Limited", "NRB Commercial Bank Limited", "One Bank Limited", "Padma Bank Limited", "Premier Bank Limited", "Prime Bank Ltd", "Probashi Kollyan Bank", "Pubali Bank Limited", "Rajshahi Krishi Unnayan Bank", "Rupali Bank Limited", "Shahjalal Islami Bank Limited", "Shimanto Bank Limited", "Social Islami Bank Ltd.", "Sonali Bank Limited", "South Bangla Agriculture & Commerce Bank Limited", "Southeast Bank Limited", "Standard Bank Limited", "Standard Chartered Bank", "State Bank of India", "The City Bank Ltd.", "The Hong Kong and Shanghai Banking Corporation. Ltd.", "Trust Bank Limited", "Union Bank Limited", "United Commercial Bank PLC", "Uttara Bank Limited", "Woori Bank"};
+
+        countryList.add("Select Bank Name");
+        countryList.addAll(Arrays.asList(list));
+        return countryList;
     }
 
     public class SearchableDropdown implements View.OnClickListener {
@@ -194,8 +311,7 @@ public class FormCFragment extends Fragment {
             EditText editText = dialog.findViewById(R.id.editText_of_searchableSpinner);
             ListView listView = dialog.findViewById(R.id.listView_of_searchableSpinner);
             //array adapter
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this.context,
-                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, this.adapterList);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this.context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, this.adapterList);
             listView.setAdapter(arrayAdapter);
             //Text-watcher for change data after every text type by user
             editText.addTextChangedListener(new TextWatcher() {
@@ -232,57 +348,17 @@ public class FormCFragment extends Fragment {
     }
 
     public void init() {
-        ArrayAdapter<String> countryAdaptor = new ArrayAdapter<>(getContext(), R.layout.spinner_item, getCountryList());
-        ArrayAdapter<String> currencyAdaptor = new ArrayAdapter<>(getContext(), R.layout.spinner_item, getCurrencyList());
-        countryAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        currencyAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         binding.spinnerCountry.setOnClickListener(
-                view -> {
-                    dialog = new Dialog(getContext());
-                    //set  (our custom layout for dialog)
-                    dialog.setContentView(R.layout.layout_searchable_spinner);
-
-                    //set transparent background
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-                    //show dialog
-                    dialog.show();
-
-                    //initialize and assign variable
-                    EditText editText = dialog.findViewById(R.id.editText_of_searchableSpinner);
-                    ListView listView = dialog.findViewById(R.id.listView_of_searchableSpinner);
-                    //array adapter
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),
-                            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, getCountryList());
-                    listView.setAdapter(arrayAdapter);
-                    //Text-watcher for change data after every text type by user
-                    editText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            //filter arraylist
-                            arrayAdapter.getFilter().filter(charSequence);
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable editable) {
-                        }
-                    });
-
-                    // listview onitem click listener
-                    listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-                        binding.spinnerCountry.setText(arrayAdapter.getItem(i));
-//                        Toast.makeText(getContext(), "Selected:" + arrayAdapter.getItem(i), Toast.LENGTH_SHORT).show();
-                        //dismiss dialog after choose
-                        dialog.dismiss();
-                    });
-                });
-        binding.spinnerCurrency.setOnClickListener(
-                new SearchableDropdown(getContext(), binding.spinnerCurrency, getCurrencyList())
+            new SearchableDropdown(getContext(), binding.spinnerCountry, getCountryList())
         );
+
+        binding.spinnerBankName.setOnClickListener(new SearchableDropdown(getContext(), binding.spinnerBankName, getBankList()));
+
+        binding.spinnerPurpose.setOnClickListener(new SearchableDropdown(getContext(), binding.spinnerPurpose, getPurposeList()));
+
+        binding.spinnerCurrency.setOnClickListener(new SearchableDropdown(getContext(), binding.spinnerCurrency, getCurrencyList()));
+
     }
 
     public List<String> getCountryList() {
