@@ -1,4 +1,4 @@
-package com.example.androidbasics.FormC;
+package com.example.androidbasics.FormC.views;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -8,18 +8,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.androidbasics.FormC.viewmodel.FormCViewModel;
 import com.example.androidbasics.R;
-import com.example.androidbasics.databinding.FragmentFormCBinding;
 import com.example.androidbasics.databinding.FragmentFormCConfirmBinding;
-import com.example.androidbasics.psrupload.views.PsrUploadFragment;
 
 public class FormCConfirmFragment extends Fragment {
 

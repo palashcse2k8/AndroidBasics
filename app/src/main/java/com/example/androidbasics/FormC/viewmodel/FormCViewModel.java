@@ -1,4 +1,4 @@
-package com.example.androidbasics.FormC;
+package com.example.androidbasics.FormC.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

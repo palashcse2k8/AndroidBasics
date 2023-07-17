@@ -1,4 +1,4 @@
-package com.example.androidbasics.FormC;
+package com.example.androidbasics.FormC.views;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,12 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.androidbasics.FormC.viewmodel.FormCViewModel;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCContinueBinding;
-import com.example.androidbasics.psrupload.views.PsrUploadFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

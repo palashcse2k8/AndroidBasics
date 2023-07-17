@@ -10,7 +10,7 @@
 // - Sun Tsu,
 // "The Art of War"
 
-package com.example.androidbasics.imagecropper;
+package com.example.androidbasics.psrupload.imagecropper;
 
 import android.app.Activity;
 import android.content.Context;

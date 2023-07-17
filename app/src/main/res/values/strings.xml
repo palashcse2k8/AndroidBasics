@@ -51,4 +51,5 @@
     <string name="terms_and_condition_text">I agree to all the <a href='http://www.redbus.in/mob/mTerms.aspx\'>Terms and Conditions</a></string>
     <string name="uploaded_psr_information">PSR Uploaded Info</string>
     <string name="enter_wallet_pin">ENTER WALLET PIN</string>
+    <string name="no_psr_uploaded_yet">No PSR uploaded yet</string>
 </resources>

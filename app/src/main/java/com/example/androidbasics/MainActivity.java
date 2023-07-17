@@ -26,8 +26,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.androidbasics.FormC.FormCSubmissionFragment;
-import com.example.androidbasics.FormC.FormCViewModel;
+import com.example.androidbasics.FormC.views.FormCSubmissionFragment;
+import com.example.androidbasics.FormC.viewmodel.FormCViewModel;
 import com.example.androidbasics.databinding.ActivityMainBinding;
 import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 import com.example.androidbasics.psrupload.views.ModuleSelectionFragment;

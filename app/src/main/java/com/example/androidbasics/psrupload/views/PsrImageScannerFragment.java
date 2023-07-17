@@ -17,12 +17,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentPsrImageScannerBinding;
-import com.example.androidbasics.imagecropper.CropImage;
-import com.example.androidbasics.imagecropper.CropImageView;
+import com.example.androidbasics.psrupload.imagecropper.CropImage;
+import com.example.androidbasics.psrupload.imagecropper.CropImageView;
 import com.example.androidbasics.psrupload.utils.ImageUtil;
 import com.example.androidbasics.psrupload.viewmodels.PSRViewModel;
 

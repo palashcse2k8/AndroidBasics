@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.androidbasics.FormC.FormCFragment;
+import com.example.androidbasics.FormC.views.FormCFragment;
 import com.example.androidbasics.OCR.NIDFragment;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentModuleSelectionBinding;

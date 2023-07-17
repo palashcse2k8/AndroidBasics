@@ -6,10 +6,12 @@ import static com.example.androidbasics.psrupload.utils.JsonParser.getAssessment
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,16 +51,21 @@ public class PsrUploadMainFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ListViewAdapter listViewAdapter;
 
-        ListViewAdapter listViewAdapter = new ListViewAdapter(getContext(), responseModelList);
+        listViewAdapter = new ListViewAdapter(getContext(), responseModelList);
         binding.lvSubmissionResult.setAdapter(listViewAdapter);
         listViewAdapter.notifyDataSetChanged();
-        binding.lvSubmissionResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showDetailAlertDialogue(position);
-            }
-        });
+
+        if(!responseModelList.isEmpty()) {
+            binding.lvSubmissionResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    showDetailAlertDialogue(position);
+                }
+            });
+        }
+
         binding.btnAddPSR.setOnClickListener(v -> {
             Fragment fragment = new PsrUploadFragment();
             String tag = fragment.getClass().getSimpleName();

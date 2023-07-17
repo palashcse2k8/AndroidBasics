@@ -1,4 +1,4 @@
-package com.example.androidbasics.FormC;
+package com.example.androidbasics.FormC.views;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.androidbasics.FormC.viewmodel.FormCViewModel;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCSubmissionBinding;
 import com.example.androidbasics.psrupload.utils.PDFGenerator;

@@ -10,7 +10,7 @@
 // - Sun Tsu,
 // "The Art of War"
 
-package com.example.androidbasics.imagecropper;
+package com.example.androidbasics.psrupload.imagecropper;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,21 +35,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import com.example.androidbasics.R;
-import com.example.androidbasics.psrupload.views.PsrMergeFragment;
-
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
+import com.example.androidbasics.R;
 
 /**
  * Helper to simplify crop image work like starting pick-image acitvity and handling camera/gallery
@@ -62,13 +59,12 @@ import java.util.List;
  * to device.
  */
 @SuppressWarnings("WeakerAccess, unused")
-public final class CropImageNew {
+public final class CropImage {
 
   // region: Fields and Consts
 
   /** The key used to pass crop image source URI to {@link CropImageActivity}. */
   public static final String CROP_IMAGE_EXTRA_SOURCE = "CROP_IMAGE_EXTRA_SOURCE";
-  public static final String CROP_IMAGE_REQUEST_KEY = "CROP_IMAGE_REQUEST_KEY";
 
   /** The key used to pass crop image options to {@link CropImageActivity}. */
   public static final String CROP_IMAGE_EXTRA_OPTIONS = "CROP_IMAGE_EXTRA_OPTIONS";
@@ -99,15 +95,12 @@ public final class CropImageNew {
   public static final int CROP_IMAGE_REQUEST_FIRST_CODE = 204;
   public static final int CROP_IMAGE_REQUEST_SECOND_CODE = 205;
 
-  public static final String CROP_IMAGE_REQUEST_FIRST_CODE_STRING = "CROP_IMAGE_REQUEST_FIRST_CODE_STRING";
-  public static final String CROP_IMAGE_REQUEST_SECOND_CODE_STRING = "CROP_IMAGE_REQUEST_SECOND_CODE_STRING";
-
 
   /** The result code used to return error from {@link CropImageActivity}. */
   public static final int CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE = 204;
   // endregion
 
-  private CropImageNew() {}
+  private CropImage() {}
 
   /**
    * Create a new bitmap that has all pixels beyond the oval shape transparent. Old bitmap is
@@ -486,17 +479,8 @@ public final class CropImageNew {
       Bundle bundle = new Bundle();
       bundle.putParcelable(CROP_IMAGE_EXTRA_SOURCE, mSource);
       bundle.putParcelable(CROP_IMAGE_EXTRA_OPTIONS, mOptions);
-      intent.putExtra(CROP_IMAGE_EXTRA_BUNDLE, bundle);
+      intent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
       return intent;
-    }
-
-    public Bundle getBundle(@NonNull Context context, String requestKey) {
-      mOptions.validate();
-      Bundle bundle = new Bundle();
-      bundle.putParcelable(CROP_IMAGE_EXTRA_SOURCE, mSource);
-      bundle.putParcelable(CROP_IMAGE_EXTRA_OPTIONS, mOptions);
-      bundle.putString(CROP_IMAGE_REQUEST_KEY, requestKey);
-      return bundle;
     }
 
     /**
@@ -526,22 +510,6 @@ public final class CropImageNew {
      */
     public void start(@NonNull Context context, @NonNull Fragment fragment, int requestCode) {
       fragment.startActivityForResult(getIntent(context), requestCode);
-    }
-
-    /**
-     * Start {@link CropImageActivity}.
-     *
-     * @param fragment fragment to receive result
-     */
-    public void startFragment(@NonNull AppCompatActivity activity, @NonNull Fragment fragment, String requestKey) {
-      startCropImageFragment(activity, fragment, requestKey);
-    }
-
-    public void startCropImageFragment (AppCompatActivity activity, Fragment callingFragment, String requestKey) {
-      Fragment fragment = new CropImageFragment();
-      fragment.setArguments(getBundle(activity, requestKey));
-      String tag = fragment.getClass().getSimpleName();
-      activity.getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container_view, fragment, tag).addToBackStack(tag).commit();
     }
 
     /**

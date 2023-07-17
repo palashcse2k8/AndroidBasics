@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/horizontal_margin"
     android:orientation="vertical"
-    tools:context=".FormC.FormCConfirmFragment">
+    tools:context=".FormC.views.FormCConfirmFragment">
 
     <TextView
         android:layout_width="wrap_content"

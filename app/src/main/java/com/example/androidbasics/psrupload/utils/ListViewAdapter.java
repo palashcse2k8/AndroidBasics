@@ -4,28 +4,25 @@ import static com.example.androidbasics.psrupload.utils.DateTimeUtil.getSimpleDa
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.androidbasics.R;
 import com.example.androidbasics.apihandle.QueryResponseModel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private Context context = null;
-    private List<QueryResponseModel> results = null;
+    private final Context context;
+    private final List<QueryResponseModel> results;
+
+    private static final int VIEW_TYPE_ITEM = 0;
+    private static final int VIEW_TYPE_EMPTY = 1;
 
     public ListViewAdapter(Context context, List<QueryResponseModel> arr) {
         this.context = context;
@@ -34,7 +31,13 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return results.size();
+        if (results.isEmpty()) {
+            // Return 1 for the empty list layout
+            return 1;
+        } else {
+            // Return the actual item count
+            return results.size();
+        }
     }
 
     @Override
@@ -48,30 +51,58 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.layout_psr_listview_item, null);
-
-        TextView lblAssessmentYear = (TextView) convertView.findViewById(R.id.lblAssessmentYear);
-        TextView lblName = (TextView) convertView.findViewById(R.id.lblName);
-        TextView lblTin = (TextView) convertView.findViewById(R.id.lblTin);
-        TextView lblStatus = (TextView) convertView.findViewById(R.id.lblStatus);
-        TextView lblDate = (TextView) convertView.findViewById(R.id.lblDate);
-
-        lblAssessmentYear.setText(results.get(position).getAssessmentYear());
-        lblName.setText(results.get(position).getCustomerName());
-        lblTin.setText(results.get(position).getTin());
-
-
-        String status = results.get(position).getTrStatus();
-        lblStatus.setText(status);
-//        lblStatus.setTextColor(Color.GREEN);
-        if(status.equalsIgnoreCase("Rejected")){
-            lblStatus.setTextColor(Color.RED);
+    public int getItemViewType(int position) {
+        if (results.isEmpty()) {
+            // Return the view type for the empty list layout
+            return VIEW_TYPE_EMPTY;
+        } else {
+            // Return the view type for the regular item layout
+            return VIEW_TYPE_ITEM;
         }
+    }
 
-        String date = results.get(position).getTrUploadDate();
-        lblDate.setText("Date: " + getSimpleDate(date));
+    @Override
+    public int getViewTypeCount() {
+        // Return the number of view types (including the empty list layout)
+        return 2;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
+        if (getItemViewType(position) == VIEW_TYPE_EMPTY) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(R.layout.layout_psr_listview_no_item, viewGroup, false);
+
+//            // Adjust parent ViewGroup layout parameters to fill parent area
+//            ViewGroup.LayoutParams layoutParams = viewGroup.getLayoutParams();
+//            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+//            viewGroup.setLayoutParams(layoutParams);
+        } else {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(R.layout.layout_psr_listview_item, viewGroup, false);
+
+            // Bind data to the regular item layout views
+            TextView lblAssessmentYear = convertView.findViewById(R.id.lblAssessmentYear);
+            TextView lblName = convertView.findViewById(R.id.lblName);
+            TextView lblTin = convertView.findViewById(R.id.lblTin);
+            TextView lblStatus = convertView.findViewById(R.id.lblStatus);
+            TextView lblDate = convertView.findViewById(R.id.lblDate);
+
+            QueryResponseModel item = results.get(position);
+            lblAssessmentYear.setText(item.getAssessmentYear());
+            lblName.setText(item.getCustomerName());
+            lblTin.setText(item.getTin());
+
+            String status = item.getTrStatus();
+            lblStatus.setText(status);
+            if (status.equalsIgnoreCase("Rejected")) {
+                lblStatus.setTextColor(Color.RED);
+            }
+
+            String date = item.getTrUploadDate();
+            lblDate.setText("Date: " + getSimpleDate(date));
+        }
 
         return convertView;
     }

@@ -23,7 +23,7 @@ public class DateTimeUtil {
             formattedDate = outputFormat.format(date);
 
             // Use the formattedDate as needed (e.g., set it to a TextView)
-            Log.d("formattedDate", formattedDate);// Output: 20-06-2023
+//            Log.d("formattedDate", formattedDate);// Output: 20-06-2023
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class DateTimeUtil {
             formattedTime = outputFormat.format(date);
 
             // Use the formattedTime as needed (e.g., set it to a TextView)
-            System.out.println(formattedTime); // Output: 11:24 AM
+//            System.out.println(formattedTime); // Output: 11:24 AM
         } catch (ParseException e) {
             e.printStackTrace();
         }

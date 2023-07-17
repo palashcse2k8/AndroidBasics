@@ -1,4 +1,4 @@
-package com.example.androidbasics.FormC;
+package com.example.androidbasics.FormC.views;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.androidbasics.FormC.viewmodel.FormCViewModel;
 import com.example.androidbasics.R;
 import com.example.androidbasics.databinding.FragmentFormCBinding;
 
@@ -292,6 +293,8 @@ public class FormCFragment extends Fragment {
         Dialog dialog;
 
         SearchableDropdown(Context context, View view, List<String> list) {
+            TextView textView = (TextView) view;
+            textView.requestFocus();
             this.adapterList = list;
             this.context = context;
             myTextView = (TextView) view;
